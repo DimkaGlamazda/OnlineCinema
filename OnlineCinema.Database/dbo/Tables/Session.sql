@@ -4,6 +4,7 @@
     [TimeFrom] TIME (7)       NOT NULL,
     [TimeTo]   TIME (7)       NOT NULL,
     [IsDeleted] BIT NOT NULL DEFAULT 0, 
-    CONSTRAINT [PK_Session] PRIMARY KEY CLUSTERED ([Id] ASC)
+    CONSTRAINT [PK_Session] PRIMARY KEY CLUSTERED ([Id] ASC), 
+    CONSTRAINT [FK_Session_ToSchedule] FOREIGN KEY ([Id]) REFERENCES [Schedule]([SessionId])
 );
 

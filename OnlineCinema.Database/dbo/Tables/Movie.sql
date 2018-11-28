@@ -6,6 +6,7 @@
     [VideoLink]  NVARCHAR (MAX) NULL,
     [RentalFrom] DATETIME       NOT NULL,
     [RentalTo]   DATETIME       NOT NULL,
+    [IsDeleted] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [PK_Movie] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

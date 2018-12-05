@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineCinema.BL.Model
 {
@@ -16,6 +12,5 @@ namespace OnlineCinema.BL.Model
 
         public TimeSpan TimeTo { get; set; }
 
-        public bool IsDeleted { get; set; }
     }
 }

@@ -18,8 +18,6 @@ namespace OnlineCinema.DB.DTOs
 
         public string VideoLink { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public virtual GenreDto Genre { get; set; }
     }
 }

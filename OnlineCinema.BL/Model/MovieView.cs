@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace OnlineCinema.BL.Model
 {
@@ -17,8 +13,6 @@ namespace OnlineCinema.BL.Model
         public byte[] Image { get; set; }
 
         public string VideoLink { get; set; }
-
-        public bool IsDeleted { get; set; }
 
         public virtual GenreView Genre { get; set; }
     }

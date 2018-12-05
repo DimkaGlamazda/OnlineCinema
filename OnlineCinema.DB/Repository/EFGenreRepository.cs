@@ -37,7 +37,7 @@ namespace OnlineCinema.DB.Repository
 
         public Genre GetDeteils(int id)
         {
-            return _context.Genre.FirstOrDefault(x=>x.Id==id);
+            return _context.Genre.FirstOrDefault(x=>x.Id==id );
         }
 
         public void Update(Genre genre)

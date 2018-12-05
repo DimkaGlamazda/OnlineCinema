@@ -1,10 +1,5 @@
 ﻿using OnlineCinema.DB.DataModels;
 using OnlineCinema.DB.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineCinema.DB.Extensions
 {
@@ -20,8 +15,7 @@ namespace OnlineCinema.DB.Extensions
             return new Genre
             {
                 Id = genreDto.Id,
-                Name = genreDto.Name,
-                IsDeleted = genreDto.IsDeleted
+                Name = genreDto.Name
             };
         }
 
@@ -35,8 +29,7 @@ namespace OnlineCinema.DB.Extensions
             return new GenreDto
             {
                 Id = genre.Id,
-                Name = genre.Name,
-                IsDeleted = genre.IsDeleted
+                Name = genre.Name
             };
         }
     }

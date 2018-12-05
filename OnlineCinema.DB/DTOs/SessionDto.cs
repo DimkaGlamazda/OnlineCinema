@@ -15,7 +15,5 @@ namespace OnlineCinema.DB.DTOs
         public TimeSpan TimeFrom { get; set; }
 
         public TimeSpan TimeTo { get; set; }
-
-        public bool IsDeleted { get; set; }
     }
 }

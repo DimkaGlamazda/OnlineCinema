@@ -40,16 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\GenreConversion.cs" />
     <Compile Include="Extensions\MovieConvertion.cs" />
     <Compile Include="Extensions\ScheduleConvertion.cs" />
+    <Compile Include="Extensions\SessionConversion.cs" />
     <Compile Include="Model\GenreView.cs" />
     <Compile Include="Model\MovieView.cs" />
     <Compile Include="Model\ScheduleView.cs" />
     <Compile Include="Model\SessionView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\MovieService.cs" />
-    <Compile Include="Services\ScheduleService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineCinema.DB\OnlineCinema.DB.csproj">
+      <Project>{5405bbf1-abce-4bfa-ab25-e4ba62f65531}</Project>
+      <Name>OnlineCinema.DB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

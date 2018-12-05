@@ -1,10 +1,5 @@
 ﻿using OnlineCinema.DB.DataModels;
 using OnlineCinema.DB.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineCinema.DB.Extensions
 {

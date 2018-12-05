@@ -1,10 +1,5 @@
 ﻿using OnlineCinema.DB.DataModels;
 using OnlineCinema.DB.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineCinema.DB.Extensions
 {
@@ -24,8 +19,7 @@ namespace OnlineCinema.DB.Extensions
                 GenreId= movieDto.GenreId,
                 Genre = movieDto.Genre.ToSqlModel(),
                 Name = movieDto.Name,
-                VideoLink = movieDto.VideoLink,
-                IsDeleted = movieDto.IsDeleted
+                VideoLink = movieDto.VideoLink
             };
         }
 
@@ -43,8 +37,7 @@ namespace OnlineCinema.DB.Extensions
                 GenreId = movie.GenreId,
                 Genre = movie.Genre.ToDto(),
                 Name = movie.Name,
-                VideoLink = movie.VideoLink,
-                IsDeleted = movie.IsDeleted
+                VideoLink = movie.VideoLink
             };
         }
     }

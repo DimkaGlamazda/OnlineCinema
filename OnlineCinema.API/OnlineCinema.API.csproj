@@ -23,6 +23,10 @@
     <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.Owin.Host.SystemWeb" Version="4.0.0" />
     <PackageReference Include="Microsoft.Owin.Security.Google" Version="4.0.0" />
+    <PackageReference Include="Ninject" Version="3.2.0" />
+    <PackageReference Include="Ninject.Web.Common" Version="3.2.0" />
+    <PackageReference Include="Ninject.Web.Common.WebHost" Version="3.2.0" />
+    <PackageReference Include="Ninject.Web.WebApi" Version="3.2.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Reflection" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
@@ -30,6 +34,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineCinema.BL\OnlineCinema.BL.csproj" />
   </ItemGroup>
 
 </Project>

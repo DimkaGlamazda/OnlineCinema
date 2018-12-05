@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.DB", "OnlineCi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.BL", "OnlineCinema.BL\OnlineCinema.BL.csproj", "{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{734CCAB3-B453-429D-84DE-5D5BFBF4578F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineCinema.Admin", "OnlineCinema.Admin\OnlineCinema.Admin.csproj", "{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.Admin", "OnlineCinema.Admin\OnlineCinema.Admin.csproj", "{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{E94D59E7-406D-4B06-B119-1C9F58ADFC60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +33,14 @@ Global
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FA2E6B2-8D5A-4BBC-A70D-961AAD47EFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E94D59E7-406D-4B06-B119-1C9F58ADFC60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E94D59E7-406D-4B06-B119-1C9F58ADFC60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E94D59E7-406D-4B06-B119-1C9F58ADFC60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E94D59E7-406D-4B06-B119-1C9F58ADFC60}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

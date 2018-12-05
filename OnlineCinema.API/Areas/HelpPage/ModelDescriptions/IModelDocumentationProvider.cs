@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace OnlineCinema.Api.Areas.HelpPage.ModelDescriptions
+namespace OnlineCinema.API.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace OnlineCinema.Api.Models
+namespace OnlineCinema.API.Models
 {
     // Models used as parameters to AccountController actions.
 

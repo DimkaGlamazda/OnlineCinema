@@ -8,10 +8,10 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using OnlineCinema.Api.Providers;
-using OnlineCinema.Api.Models;
+using OnlineCinema.API.Providers;
+using OnlineCinema.API.Models;
 
-namespace OnlineCinema.Api
+namespace OnlineCinema.API
 {
     public partial class Startup
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OnlineCinema.Api.Models
+namespace OnlineCinema.API.Models
 {
     // Models returned by AccountController actions.
 

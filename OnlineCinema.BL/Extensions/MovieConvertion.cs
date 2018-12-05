@@ -1,11 +1,16 @@
 ﻿using OnlineCinema.BL.Model;
 using OnlineCinema.DB.DTOs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OnlineCinema.BL.Extensions
 {
     static class MovieConvertion
     {
-        public static MovieView ToViewModel(this MovieDto movieDto)
+        public static MovieView ToViewModel (this MovieDto movieDto)
         {
             if (movieDto == null)
             {

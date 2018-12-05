@@ -1,4 +1,5 @@
 ﻿using OnlineCinema.BL.Model;
+using OnlineCinema.DB.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace OnlineCinema.BL.Extensions
 {
     static class MovieConvertion
     {
-        public static MovieView ToViewModel (MovieDto movieDto)
+        public static MovieView ToViewModel (this MovieDto movieDto)
         {
             if (movieDto == null)
             {
@@ -28,7 +29,7 @@ namespace OnlineCinema.BL.Extensions
             };
         }
 
-        public static MovieDto ToDtoModel(MovieView movieView)
+        public static MovieDto ToDtoModel(this MovieView movieView)
         {
             if (movieView == null)
             {
@@ -46,17 +47,5 @@ namespace OnlineCinema.BL.Extensions
                 Genre = movieView.Genre.ToDtoModel()
             };
         }
-    }
-
-    //complete del class in future
-    public class MovieDto
-    {
-        public int Id { get; set; }
-        public int GenreId { get; set; }
-        public string Name { get; set; }
-        public byte[] Image { get; set; }
-        public string VideoLink { get; set; }
-        public bool IsDeleted { get; set; }
-        public virtual GenreView Genre { get; set; }
     }
 }

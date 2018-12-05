@@ -1,4 +1,7 @@
 ﻿using OnlineCinema.BL.Model;
+using OnlineCinema.DB;
+using OnlineCinema.DB.DTOs;
+using OnlineCinema.DB.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,53 +12,51 @@ namespace OnlineCinema.BL.Services
 {
     public interface IMovieService
     {
-        //need MovieDto
-        int Add(MovieView movie);
+        int Add(MovieDto movieDto);
 
-        void Update(MovieView movie);
+        void Update(MovieDto movieDto);
 
         void Delete(int id);
 
-        MovieView GetItem(int id);
+        MovieDto GetItem(int id);
 
-        List<MovieView> GetAll();
+        List<MovieDto> GetAll();
     }
 
     public class MovieService : IMovieService
     {
-        private UnitOfWorkView _uOW = new UnitOfWorkView();
+        private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(MovieView movie)
+        public int Add(MovieDto movieDto)
         {
-            throw new NotImplementedException();
+            var movie = movieDto.ToSqlModel();
+            _uOW.EFTransacyionRepository.Add(movie);
+            _uOW.Save();
+
+            return movie.Id;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var movie = GetItem(id);
+            movie.IsDeleted = true;
+            _uOW.Save();
         }
 
-        public List<MovieView> GetAll()
+        public List<MovieDto> GetAll()
         {
-            throw new NotImplementedException();
+            return _uOW.EFTransacyionRepository.Get().Select(mov => mov.ToDto()).ToList();
         }
 
-        public MovieView GetItem(int id)
+        public MovieDto GetItem(int id)
         {
-            throw new NotImplementedException();
+            return _uOW.EFTransacyionRepository.GetDeteils(id).ToDto();
         }
 
-        public void Update(MovieView movie)
+        public void Update(MovieDto movieDto)
         {
-            throw new NotImplementedException();
-        }
-    }
-
-    //del in future
-    internal class UnitOfWorkView
-    {
-        public UnitOfWorkView()
-        {
+            var movie = movieDto.ToSqlModel();
+            _uOW.Save();
         }
     }
 }

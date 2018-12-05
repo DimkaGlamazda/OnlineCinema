@@ -1,4 +1,7 @@
 ﻿using OnlineCinema.BL.Model;
+using OnlineCinema.DB;
+using OnlineCinema.DB.DTOs;
+using OnlineCinema.DB.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,43 +12,51 @@ namespace OnlineCinema.BL.Services
 {
     public interface IScheduleService
     {
-        //need ScheduleDto
-        int Add(ScheduleView schedule);
+        int Add(ScheduleDto scheduleDto);
 
-        void Update(ScheduleView schedule);
+        void Update(ScheduleDto scheduleDto);
 
         void Delete(int id);
 
-        ScheduleView GetItem(int id);
+        ScheduleDto GetItem(int id);
 
-        List<ScheduleView> GetAll();
+        List<ScheduleDto> GetAll();
     }
 
     public class ScheduleService : IScheduleService
     {
-        public int Add(ScheduleView schedule)
+        private UnitOfWork _uOW = new UnitOfWork();
+
+        public int Add(ScheduleDto scheduleDto)
         {
-            throw new NotImplementedException();
+            var schedule = scheduleDto.ToSqlModel();
+            _uOW.EFScheduleRepository.Add(schedule);
+            _uOW.Save();
+
+            return schedule.Id;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var schedule = GetItem(id);
+            //schedule.IsDeleted = true;
+            _uOW.Save();
         }
 
-        public List<ScheduleView> GetAll()
+        public List<ScheduleDto> GetAll()
         {
-            throw new NotImplementedException();
+            return _uOW.EFScheduleRepository.Get().Select(s => s.ToDto()).ToList();
         }
 
-        public ScheduleView GetItem(int id)
+        public ScheduleDto GetItem(int id)
         {
-            throw new NotImplementedException();
+            return _uOW.EFScheduleRepository.GetDeteils(id).ToDto();
         }
 
-        public void Update(ScheduleView schedule)
+        public void Update(ScheduleDto scheduleDto)
         {
-            throw new NotImplementedException();
+            var schedule = scheduleDto.ToSqlModel();
+            _uOW.Save();
         }
     }
 }

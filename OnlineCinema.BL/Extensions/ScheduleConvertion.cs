@@ -1,4 +1,5 @@
 ﻿using OnlineCinema.BL.Model;
+using OnlineCinema.DB.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace OnlineCinema.BL.Extensions
 {
     public static class ScheduleConvertion
     {
-        public static ScheduleView ToViewModel(ScheduleDto scheduleDto)
+        public static ScheduleView ToViewModel(this ScheduleDto scheduleDto)
         {
             if (scheduleDto == null)
             {
@@ -26,14 +27,14 @@ namespace OnlineCinema.BL.Extensions
                 Session = scheduleDto.Session.ToViewModel()
             };
         }
-        public static ScheduleDto ToDtoModel(ScheduleView scheduleView)
+        public static ScheduleDto ToDtoModel(this ScheduleView scheduleView)
         {
             if (scheduleView == null)
             {
                 return null;
             }
 
-            return new ScheduleView
+            return new ScheduleDto
             {
                 Id = scheduleView.Id,
                 Date = scheduleView.Date,
@@ -43,25 +44,5 @@ namespace OnlineCinema.BL.Extensions
                 Session = scheduleView.Session.ToDtoModel()
             };
         }
-    }
-
-    //del two classes after merge
-    public class ScheduleDto
-    {
-        public int Id { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public int MovieId { get; set; }
-
-        public int SessionId { get; set; }
-
-        public virtual MovieDto Movie { get; set; }
-
-        public virtual SessionDto Session { get; set; }
-    }
-
-    public class SessionDto
-    {
     }
 }

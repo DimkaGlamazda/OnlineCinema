@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCinema.DB.DTOs
 {
-     public class ScheduleDto
+    public class ScheduleDto
     {
         public int Id { get; set; }
 
@@ -19,5 +19,7 @@ namespace OnlineCinema.DB.DTOs
         public virtual MovieDto Movie { get; set; }
 
         public virtual SessionDto Session { get; set; }
+
+        //public bool IsDeleted { get; set; }
     }
 }

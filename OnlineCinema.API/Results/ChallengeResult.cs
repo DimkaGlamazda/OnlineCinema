@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace OnlineCinema.Api.Results
+namespace OnlineCinema.API.Results
 {
     public class ChallengeResult : IHttpActionResult
     {

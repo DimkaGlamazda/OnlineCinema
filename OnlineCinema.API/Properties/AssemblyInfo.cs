@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OnlineCinema.Api")]
+[assembly: AssemblyTitle("OnlineCinema.API")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("OnlineCinema.Api")]
+[assembly: AssemblyProduct("OnlineCinema.API")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6b2fdd10-4165-4dee-941c-25e0a973c782")]
+[assembly: Guid("7eb2ba09-6492-40c7-951e-01ef00fd6890")]
 
 // Version information for an assembly consists of the following four values:
 //

@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using OnlineCinema.Api.Models;
+using OnlineCinema.API.Models;
 
-namespace OnlineCinema.Api.Providers
+namespace OnlineCinema.API.Providers
 {
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {

@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using OnlineCinema.Api.Areas.HelpPage.ModelDescriptions;
+using OnlineCinema.API.Areas.HelpPage.ModelDescriptions;
 
-namespace OnlineCinema.Api.Areas.HelpPage
+namespace OnlineCinema.API.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

@@ -6,7 +6,7 @@ using System.Web.Http;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 
-namespace OnlineCinema.Api
+namespace OnlineCinema.API
 {
     public static class WebApiConfig
     {

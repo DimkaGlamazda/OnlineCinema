@@ -10,6 +10,7 @@ namespace OnlineCinema.API.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using OnlineCinema.BL.Services;
 
     public static class NinjectWebCommon 
     {
@@ -61,7 +62,8 @@ namespace OnlineCinema.API.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<>().To<>();
+            kernel.Bind<IMovieService>().To<MovieService>();
+            //kernel.Bind<IScheduleService>().To<ScheduleService>();
         }
     }
 }

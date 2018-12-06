@@ -226,7 +226,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -330,6 +330,10 @@
     <ProjectReference Include="..\OnlineCinema.BL\OnlineCinema.BL.csproj">
       <Project>{3fd51947-2c10-4dfd-878b-c55cedcbaf8b}</Project>
       <Name>OnlineCinema.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnlineCinema.DB\OnlineCinema.DB.csproj">
+      <Project>{5405BBF1-ABCE-4BFA-AB25-E4BA62F65531}</Project>
+      <Name>OnlineCinema.DB</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

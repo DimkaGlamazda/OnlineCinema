@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.BL", "OnlineCi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{734CCAB3-B453-429D-84DE-5D5BFBF4578F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.Tests", "OnlineCinema.Tests\OnlineCinema.Tests.csproj", "{60FD2782-6462-4545-AF48-C7942A3840F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

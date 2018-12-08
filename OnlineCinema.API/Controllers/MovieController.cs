@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
     [Authorize]
     public class MovieController : ApiController
     {
+        [Inject]
         private readonly IMovieService _movieService;
 
         public MovieController(IMovieService movieService)
@@ -31,7 +33,7 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult Get(int id)
         {
-            var movie = _movieService.Get(id).ToViewModel();
+            var movie = _movieService.GetItem(id).ToViewModel();
 
             return Ok(movie);
         }
@@ -47,7 +49,7 @@ namespace OnlineCinema.API.Controllers
         [HttpPut]
         public IHttpActionResult Update([FromBody] MovieView model)
         {
-            _movieService.Update(model.ToDTOModel());
+            _movieService.Update(model.ToDtoModel());
 
             return Ok();
         }

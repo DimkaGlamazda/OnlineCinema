@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCinema.BL.Extensions
 {
-    static class MovieConvertion
+    public static class MovieConvertion
     {
         public static MovieView ToViewModel (this MovieDto movieDto)
         {

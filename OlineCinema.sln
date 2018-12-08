@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.BL", "OnlineCi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.Tests", "OnlineCinema.Tests\OnlineCinema.Tests.csproj", "{60FD2782-6462-4545-AF48-C7942A3840F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,10 +33,14 @@ Global
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{734CCAB3-B453-429D-84DE-5D5BFBF4578F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60FD2782-6462-4545-AF48-C7942A3840F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -25,8 +25,7 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _moviesList = _movieService.GetAll().Select(b => b.ToViewModel());
-
+            var _moviesList = _movieService.GetAll().Select(b => b.ToViewModel()).OrderByDescending(f => f.Name);
             return Ok(_moviesList);
         }
 
@@ -41,17 +40,23 @@ namespace OnlineCinema.API.Controllers
         [HttpPost]
         public IHttpActionResult Add([FromBody]MovieView movie)
         {
-            int clientId = _movieService.Add(movie.ToDtoModel());
-
-            return Ok(clientId);
+            if (ModelState.IsValid)
+            {
+                int clientId = _movieService.Add(movie.ToDtoModel());
+                return Ok(clientId);
+            }
+            return BadRequest("You've entered invalid values!");
         }
 
         [HttpPut]
         public IHttpActionResult Update([FromBody] MovieView model)
         {
-            _movieService.Update(model.ToDtoModel());
-
-            return Ok();
+            if (ModelState.IsValid)
+            {
+                _movieService.Update(model.ToDtoModel());
+                return Ok();
+            }
+            return BadRequest("You've entered invalid values!");
         }
 
         [HttpDelete]

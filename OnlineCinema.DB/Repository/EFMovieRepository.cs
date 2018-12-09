@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using OnlineCinema.DB.DataModels;
+using OnlineCinema.DB.DTOs;
 
 namespace OnlineCinema.DB.Repository
 {
@@ -29,12 +30,16 @@ namespace OnlineCinema.DB.Repository
 
         public List<Movie> Get()
         {
-            return _context.Movie.ToList();
+            return _context.Movie
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .ToList();
         }
 
         public Movie GetDeteils(int id)
         {
-            return _context.Movie.FirstOrDefault(x => x.Id == id);
+            return _context.Movie
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Movie movie)
@@ -46,7 +51,6 @@ namespace OnlineCinema.DB.Repository
             OldMovie.Name = movie.Name;
             OldMovie.VideoLink = movie.VideoLink;
             OldMovie.GenreId = movie.GenreId;
-            OldMovie.Genre = movie.Genre;
         }
     }
 }

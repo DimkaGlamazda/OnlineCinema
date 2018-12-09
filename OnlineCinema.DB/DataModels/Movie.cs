@@ -26,7 +26,7 @@ namespace OnlineCinema.DB.DataModels
 
         public string VideoLink { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool? IsDeleted { get; set; }
 
         public virtual Genre Genre { get; set; }
 

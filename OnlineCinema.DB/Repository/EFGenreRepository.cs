@@ -32,12 +32,18 @@ namespace OnlineCinema.DB.Repository
 
         public List<Genre> Get()
         {
-            return _context.Genre.ToList();
+            return _context.Genre
+                .Where(c => !c.IsDeleted.HasValue || !c.IsDeleted.Value)
+                .ToList();
         }
 
         public Genre GetDeteils(int id)
         {
-            return _context.Genre.FirstOrDefault(x=>x.Id==id );
+
+
+            return _context.Genre
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Genre genre)

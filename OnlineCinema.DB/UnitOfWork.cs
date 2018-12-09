@@ -35,7 +35,7 @@ namespace OnlineCinema.DB
             }
         }
 
-        public EFMovieRepository EFTransacyionRepository
+        public EFMovieRepository EFMovieRepository
         {
             get
             {

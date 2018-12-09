@@ -8,7 +8,7 @@ namespace OnlineCinema.DB.DataModels
     public partial class OnlineCinemaDataModel : DbContext
     {
         public OnlineCinemaDataModel()
-            : base("name=OnlineCinemaDataModel2")
+            : base("name=OnlineCinemaDataModel")
         {
         }
 

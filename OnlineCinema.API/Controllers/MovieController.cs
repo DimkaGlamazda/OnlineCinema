@@ -25,7 +25,7 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _moviesList = _movieService.GetAll().Select(b => b.ToViewModel()).OrderByDescending(f => f.Name);
+            var _moviesList = _movieService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Name);
             return Ok(_moviesList);
         }
 

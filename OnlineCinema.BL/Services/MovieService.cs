@@ -30,7 +30,7 @@ namespace OnlineCinema.BL.Services
         public int Add(MovieDto movieDto)
         {
             var movie = movieDto.ToSqlModel();
-            _uOW.EFTransacyionRepository.Add(movie);
+            _uOW.EFMovieRepository.Add(movie);
             _uOW.Save();
 
             return movie.Id;
@@ -45,12 +45,12 @@ namespace OnlineCinema.BL.Services
 
         public List<MovieDto> GetAll()
         {
-            return _uOW.EFTransacyionRepository.Get().Select(mov => mov.ToDto()).ToList();
+            return _uOW.EFMovieRepository.Get().Select(mov => mov.ToDto()).ToList();
         }
 
         public MovieDto GetItem(int id)
         {
-            return _uOW.EFTransacyionRepository.GetDeteils(id).ToDto();
+            return _uOW.EFMovieRepository.GetDeteils(id).ToDto();
         }
 
         public void Update(MovieDto movieDto)

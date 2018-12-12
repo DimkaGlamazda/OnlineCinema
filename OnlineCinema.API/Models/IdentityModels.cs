@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System.Configuration;
 
 namespace OnlineCinema.API.Models
 {
@@ -21,7 +22,7 @@ namespace OnlineCinema.API.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(ConfigurationManager.ConnectionStrings["OnlineCinemaDataModel"].ConnectionString, throwIfV1Schema: false)
         {
         }
         

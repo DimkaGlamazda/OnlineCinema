@@ -39,7 +39,7 @@ namespace OnlineCinema.BL.Services
         public void Delete(int id)
         {
             var movie = GetItem(id);
-            movie.IsDeleted = true;
+            //movie.IsDeleted = true;
             _uOW.Save();
         }
 

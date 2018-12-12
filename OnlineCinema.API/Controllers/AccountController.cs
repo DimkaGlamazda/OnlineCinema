@@ -13,11 +13,11 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using OnlineCinema.Api.Models;
-using OnlineCinema.Api.Providers;
-using OnlineCinema.Api.Results;
+using OnlineCinema.API.Models;
+using OnlineCinema.API.Providers;
+using OnlineCinema.API.Results;
 
-namespace OnlineCinema.Api.Controllers
+namespace OnlineCinema.API.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]

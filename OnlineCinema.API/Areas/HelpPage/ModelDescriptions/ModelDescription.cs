@@ -1,6 +1,6 @@
 using System;
 
-namespace OnlineCinema.Api.Areas.HelpPage.ModelDescriptions
+namespace OnlineCinema.API.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

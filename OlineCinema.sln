@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.DB", "OnlineCi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.BL", "OnlineCinema.BL\OnlineCinema.BL.csproj", "{3FD51947-2C10-4DFD-878B-C55CEDCBAF8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{734CCAB3-B453-429D-84DE-5D5BFBF4578F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.API", "OnlineCinema.API\OnlineCinema.API.csproj", "{90EB60FC-8C3F-4C6A-8085-5CE37DCCE48E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineCinema.Tests", "OnlineCinema.Tests\OnlineCinema.Tests.csproj", "{60FD2782-6462-4545-AF48-C7942A3840F8}"
 EndProject

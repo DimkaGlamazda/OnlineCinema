@@ -1,4 +1,4 @@
-namespace OnlineCinema.Api.Areas.HelpPage
+namespace OnlineCinema.API.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

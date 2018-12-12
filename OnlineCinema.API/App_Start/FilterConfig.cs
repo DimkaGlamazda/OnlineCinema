@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace OnlineCinema.Api
+namespace OnlineCinema.API
 {
     public class FilterConfig
     {

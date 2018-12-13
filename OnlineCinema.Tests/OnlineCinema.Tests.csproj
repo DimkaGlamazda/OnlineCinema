@@ -56,6 +56,7 @@
     <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiTest\MovieApiIntergrationTest.cs" />
     <Compile Include="TestRepository\GenreIntegratedTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestRepository\MovieIntegrationTest.cs" />

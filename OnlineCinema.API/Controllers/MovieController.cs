@@ -11,10 +11,8 @@ using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
-    [Authorize]
     public class MovieController : ApiController
     {
-        [Inject]
         private readonly IMovieService _movieService;
 
         public MovieController(IMovieService movieService)
@@ -30,13 +28,19 @@ namespace OnlineCinema.API.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(int? id)
         {
-            var movie = _movieService.GetItem(id).ToViewModel();
+            if (!id.HasValue)
+                return BadRequest();
 
+            if (id <= 0)
+                return BadRequest();
+
+            var movie = _movieService.GetItem(id.Value).ToViewModel();
             return Ok(movie);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IHttpActionResult Add([FromBody]MovieView movie)
         {
@@ -48,6 +52,7 @@ namespace OnlineCinema.API.Controllers
             return BadRequest("You've entered invalid values!");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPut]
         public IHttpActionResult Update([FromBody] MovieView model)
         {
@@ -59,6 +64,7 @@ namespace OnlineCinema.API.Controllers
             return BadRequest("You've entered invalid values!");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {

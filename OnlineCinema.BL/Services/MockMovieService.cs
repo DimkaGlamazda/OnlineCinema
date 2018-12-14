@@ -28,7 +28,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 1,
                 Name = "Back to the Future",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0088763/"
+                VideoLink = "https://www.imdb.com/title/tt0088763/",
+                Genre = new GenreDto ()
+                {
+                    Id = 1,
+                    Name = "Adventure"
+                }
             },
             new MovieDto ()
             {
@@ -36,7 +41,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 3,
                 Name = "The Dark Knight",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0468569/"
+                VideoLink = "https://www.imdb.com/title/tt0468569/",
+                Genre = new GenreDto ()
+                {
+                    Id = 3,
+                    Name = "Action"
+                }
             },
             new MovieDto ()
             {
@@ -44,7 +54,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 2,
                 Name = "Pulp Fiction",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0110912/"
+                VideoLink = "https://www.imdb.com/title/tt0110912/",
+                Genre = new GenreDto ()
+                {
+                    Id = 2,
+                    Name = "Crime"
+                }
             },
             new MovieDto ()
             {
@@ -52,7 +67,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 5,
                 Name = "Slumdog Millionaire",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt1010048/"
+                VideoLink = "https://www.imdb.com/title/tt1010048/",
+                Genre = new GenreDto ()
+                {
+                    Id = 5,
+                    Name = "Drama"
+                }
             },
             new MovieDto ()
             {
@@ -60,7 +80,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 4,
                 Name = "Monsters, Inc.",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0198781/"
+                VideoLink = "https://www.imdb.com/title/tt0198781/",
+                Genre = new GenreDto ()
+                {
+                    Id = 4,
+                    Name = "Animation"
+                }
             },
             new MovieDto ()
             {
@@ -68,7 +93,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 5,
                 Name = "Bohemian Rhapsodye",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt1727824/"
+                VideoLink = "https://www.imdb.com/title/tt1727824/",
+                Genre = new GenreDto ()
+                {
+                    Id = 5,
+                    Name = "Drama"
+                }
             },
             new MovieDto ()
             {
@@ -76,7 +106,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 1,
                 Name = "The Shape of Water",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt5580390/"
+                VideoLink = "https://www.imdb.com/title/tt5580390/",
+                Genre = new GenreDto ()
+                {
+                    Id = 1,
+                    Name = "Adventure"
+                }
             },
             new MovieDto ()
             {
@@ -84,7 +119,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 2,
                 Name = "The Departed",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0407887/"
+                VideoLink = "https://www.imdb.com/title/tt0407887/",
+                Genre = new GenreDto ()
+                {
+                    Id = 2,
+                    Name = "Crime"
+                }
             },
             new MovieDto ()
             {
@@ -92,7 +132,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 3,
                 Name = "Sherlock Holmes",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt0988045/"
+                VideoLink = "https://www.imdb.com/title/tt0988045/",
+                Genre = new GenreDto ()
+                {
+                    Id = 3,
+                    Name = "Action"
+                }
             },
             new MovieDto ()
             {
@@ -100,7 +145,12 @@ namespace OnlineCinema.BL.Services
                 GenreId = 4,
                 Name = "Zootopia",
                 Image = null,
-                VideoLink = "https://www.imdb.com/title/tt2948356/"
+                VideoLink = "https://www.imdb.com/title/tt2948356/",
+                Genre = new GenreDto ()
+                {
+                    Id = 4,
+                    Name = "Animation"
+                }
             }
         };
 

@@ -28,15 +28,15 @@ namespace OnlineCinema.API.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult Get(int? id)
+        public IHttpActionResult Get(int id)
         {
-            if (!id.HasValue)
-                return BadRequest();
-
             if (id <= 0)
                 return BadRequest();
 
-            var movie = _movieService.GetItem(id.Value).ToViewModel();
+            if (_movieService.GetAll().FirstOrDefault(k => k.Id == id) == null)
+                return BadRequest();
+
+            var movie = _movieService.GetItem(id).ToViewModel();
             return Ok(movie);
         }
 

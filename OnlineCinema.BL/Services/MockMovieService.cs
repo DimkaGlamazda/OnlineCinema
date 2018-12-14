@@ -121,7 +121,7 @@ namespace OnlineCinema.BL.Services
 
         public MovieDto GetItem(int id)
         {
-            return _mockMovies[id];
+            return _mockMovies[id-1];
         }
 
         public void Update(MovieDto movieDto)

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -22,11 +23,20 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, null)</li>
+                    }
+                    else
+                    {
+                        <li><a data-toggle="modal" data-target="#loginModal" href="#">Login</a></li>
+                    }
                 </ul>
             </div>
         </div>
     </div>
     <div class="container body-content">
+
         @RenderBody()
         <hr />
         <footer>
@@ -34,8 +44,72 @@
         </footer>
     </div>
 
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Autorization</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input class="form-control mb-2" type="text" name="email" value="gldmvl@gmail.com" placeholder="Email" />
+                        <br />
+                        <input class="form-control" type="password" name="password" value="Q1234-4321" placeholder="Password"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="login" type="button" class="btn btn-primary">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+
+            var modal = $('#loginModal');
+
+            $('#login').on('click', function (e) {
+                e.preventDefault();
+
+                var username = $.trim($('[name=email]').val()); // gldmvl@gmail.com
+                var password = $.trim($('[name=password]').val()); // Q1234-4321
+                console.log(username);
+                console.log(password);
+                $.ajax({
+                    method: 'POST',
+                    url: "/Token",
+                    data: {
+                        grant_type: 'password',
+                        username: username,
+                        password: password
+                    },
+                    beforeSend: function () {
+                        modal.modal('hide');
+                    },
+                    success: function (data) {
+                        location.reload();
+                    },
+                    complete: function (jqXHR)
+                    {
+                        if (jqXHR.status === 400)
+                        {
+                            alert(jqXHR.responseJSON.error_description);
+                            modal.modal("show");
+                        }
+                    }
+                });
+            });
+
+
+        });
+    </script>
 </body>
 </html>

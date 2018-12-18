@@ -17,7 +17,20 @@ namespace OnlineCinema.API
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            var admin = UserManager.Users.FirstOrDefault(c => c.UserName == "gldmvl@gmail.com");
+  
+
+            // In Startup iam creating first Admin Role and creating a default Admin User    
+            if (!roleManager.RoleExists("Admin"))
+            {
+
+                // first we create Admin rool   
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+                
+            }
+
+          var admin = UserManager.Users.FirstOrDefault(c => c.UserName == "gldmvl@gmail.com");
 
             if (admin == null)
             {
@@ -40,18 +53,6 @@ namespace OnlineCinema.API
 
                 }
             }
-
-            // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Admin"))
-            {
-
-                // first we create Admin rool   
-                var role = new IdentityRole();
-                role.Name = "Admin";
-                roleManager.Create(role);
-                
-            }
-
             // creating Creating customer role    
             if (!roleManager.RoleExists("customer"))
             {

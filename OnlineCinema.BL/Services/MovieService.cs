@@ -56,6 +56,7 @@ namespace OnlineCinema.BL.Services
         public void Update(MovieDto movieDto)
         {
             var movie = movieDto.ToSqlModel();
+            _uOW.EFMovieRepository.Update(movie);
             _uOW.Save();
         }
     }

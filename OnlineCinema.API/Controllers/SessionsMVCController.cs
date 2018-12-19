@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using OnlineCinema.BL.Extensions;
 using OnlineCinema.BL.Model;
+using OnlineCinema.BL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,29 +16,25 @@ namespace OnlineCinema.API.Controllers
     //[Authorize(Roles = "Admin")]
     public class SessionsMVCController : Controller
     {
-        private HttpClient client;
-        private string APIpath = "http://localhost:53464/api";
+        private readonly ISessionService _sessionService;
 
         public SessionsMVCController()
         {
-            client = new HttpClient();
+            _sessionService = new SessionService();
+        }
 
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
+        public SessionsMVCController(ISessionService sessionService)
+        {
+            _sessionService = sessionService;
         }
 
         //Get All: SessionsMVC/Index
         [HttpGet]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            IEnumerable<SessionView> sessions = null;
+            var list = _sessionService.GetAll().Select(s => s.ToViewModel());
 
-            string json = await client.GetStringAsync($"{APIpath}/Sessions");
-
-            sessions = JsonConvert.DeserializeObject<IEnumerable<SessionView>>(json);
-
-            return View(sessions);
+            return View(list);
         }
 
         // GET: SessionsMVC/Create
@@ -48,12 +46,11 @@ namespace OnlineCinema.API.Controllers
 
         // POST: SessionsMVC/Create
         [HttpPost]
-        public async Task<ActionResult> Create(SessionView session)
+        public ActionResult Create(SessionView session)
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync($"{APIpath}/Session", session);
-
+                
                 return RedirectToAction("Index");
             }
             else

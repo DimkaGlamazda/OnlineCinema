@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<OnlineCinema.BL.Model.SessionView>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sessions";
 }
 
-<h2>Index</h2>
+<h2>All sessions during the day</h2>
 
 <div class="container">
     <div class="row">
@@ -13,22 +13,15 @@
             {
                 int index = Model.ToList().IndexOf(session);
 
-                <div class="item">
-                    <hr />
-                    <h3>@session.Title</h3>
-                    <p>
-                        
-                    </p>
-                    @*<p>Server type: @server.Type</p>
-                    @using (Html.BeginForm("DeleteServer", "Servers", FormMethod.Post, new { @class = $"{index}" }))
-                    {
-                        @Html.Hidden("id", server.Id)
-                        @Html.ActionLink("Изменить", "Edit", "Servers", new { id = server.Id }, null)
-                        <span>&nbsp;</span>
-                        @Html.ActionLink("Удалить", "", null, new { @class = "remove" })
-                    }*@
-                    <hr />
-                </div>
+            <div class="item">
+                <hr />
+                <h3>@session.Title</h3>
+                <h4>Start time - @session.TimeFrom</h4>
+                <h4>End time - @session.TimeTo</h4>
+                <h5>@Html.ActionLink("Edit session", "Edit", "SessionsMVC", new { id = session.Id }, null)</h5>
+                
+                <hr />
+            </div>
             }
         </div>
     </div>
@@ -37,29 +30,8 @@
     <div class="row">
         <div class="col-md-12">
             <div style="text-align: right">
-                @Html.ActionLink("Добавить сервер", "Add", "Servers")
+                @Html.ActionLink("Add session", "Create", "SessionsMVC")
             </div>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(() => {
-        const buttons = document.querySelectorAll(".remove");
-        const toList = Array.prototype.slice.call(buttons);
-
-        toList.map(i => i.addEventListener("click", (e) => {
-            e.preventDefault();
-
-            let confiramtion = confirm("Подтверждаете удаление?");
-
-            let formForSubmit = i.parentNode.className;
-
-            if (confiramtion) {
-                document.forms[formForSubmit].submit();
-            }
-
-            return false;
-        }));
-    });
-</script>

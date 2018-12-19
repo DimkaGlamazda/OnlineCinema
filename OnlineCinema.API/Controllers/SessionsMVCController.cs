@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace OnlineCinema.API.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "Admin")]
     public class SessionsMVCController : Controller
     {
         private HttpClient client;
@@ -80,12 +80,6 @@ namespace OnlineCinema.API.Controllers
             {
                 return View();
             }
-        }
-
-        // GET: SessionsMVC/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: SessionsMVC/Delete/5

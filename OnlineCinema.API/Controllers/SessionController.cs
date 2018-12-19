@@ -11,7 +11,7 @@ using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class SessionController : ApiController
     {
         private readonly ISessionService _sessionService;

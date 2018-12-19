@@ -26,26 +26,21 @@ namespace OnlineCinema.API.Controllers
                 new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-
+        //Get All: SessionsMVC/Index
+        [HttpGet]
         public async Task<ActionResult> Index()
         {
-            IEnumerable<SessionView> servers = null;
+            IEnumerable<SessionView> sessions = null;
 
             string json = await client.GetStringAsync($"{APIpath}/Sessions");
 
-            servers = JsonConvert.DeserializeObject<IEnumerable<Server>>(json);
+            sessions = JsonConvert.DeserializeObject<IEnumerable<SessionView>>(json);
 
-            return View(servers);
-        }
-
-
-        // GET: SessionsMVC/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+            return View(sessions);
         }
 
         // GET: SessionsMVC/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -53,18 +48,16 @@ namespace OnlineCinema.API.Controllers
 
         // POST: SessionsMVC/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(SessionView session)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                HttpResponseMessage response = await client.PostAsJsonAsync($"{APIpath}/Session", session);
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
+            else
                 return View();
-            }
         }
 
         // GET: SessionsMVC/Edit/5

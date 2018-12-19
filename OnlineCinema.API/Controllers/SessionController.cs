@@ -11,20 +11,21 @@ using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
-    public class MovieController : ApiController
+    [Authorize(Roles = "admin")]
+    public class SessionController : ApiController
     {
-        private readonly IMovieService _movieService;
+        private readonly ISessionService _sessionService;
 
-        public MovieController(IMovieService movieService)
+        public SessionController(ISessionService sessionService)
         {
-            _movieService = movieService;
+            _sessionService = sessionService;
         }
 
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _moviesList = _movieService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Name).ToList();
-            return Ok(_moviesList);
+            var _sessionList = _sessionService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Title).ToList();
+            return Ok(_sessionList);
         }
 
         [HttpGet]
@@ -36,42 +37,39 @@ namespace OnlineCinema.API.Controllers
             if (id <= 0)
                 return BadRequest();
 
-            if (_movieService.GetAll().FirstOrDefault(k => k.Id == id) == null)
+            if (_sessionService.GetAll().FirstOrDefault(k => k.Id == id) == null)
                 return BadRequest();
 
-            var movie = _movieService.GetItem(id.Value).ToViewModel();
-            return Ok(movie);
+            var session = _sessionService.GetItem(id.Value).ToViewModel();
+            return Ok(session);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
-        public IHttpActionResult Add([FromBody]MovieView movie)
+        public IHttpActionResult Add([FromBody]SessionView session)
         {
             if (ModelState.IsValid)
             {
-                int clientId = _movieService.Add(movie.ToDtoModel());
-                return Ok(clientId);
+                int sessionId = _sessionService.Add(session.ToDtoModel());
+                return Ok(sessionId);
             }
             return BadRequest("You've entered invalid values!");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPut]
-        public IHttpActionResult Update([FromBody] MovieView model)
+        public IHttpActionResult Update([FromBody]SessionView session)
         {
             if (ModelState.IsValid)
             {
-                _movieService.Update(model.ToDtoModel());
+                _sessionService.Update(session.ToDtoModel());
                 return Ok();
             }
             return BadRequest("You've entered invalid values!");
         }
 
-        [Authorize(Roles = "admin")]
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            _movieService.Delete(id);
+            _sessionService.Delete(id);
 
             return Ok();
         }

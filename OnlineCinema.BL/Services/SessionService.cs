@@ -30,7 +30,7 @@ namespace OnlineCinema.BL.Services
         public int Add(SessionDto sessionDto)
         {
             var sessions = GetAll();
-            if (!sessions.Any(s => s.Title == sessionDto.Title))
+            if (sessions.FirstOrDefault(s => s.Title == sessionDto.Title) == null)
             {
                 var session = sessionDto.ToSqlModel();
                 _uOW.EFSessionRepository.Add(session);
@@ -57,12 +57,12 @@ namespace OnlineCinema.BL.Services
         public SessionDto GetItem(int id)
         {
             var sessions = GetAll();
-            if (!sessions.Any(s => s.Id == id))
+            if (sessions.FirstOrDefault(s => s.Id == id) == null)
             {
                 return _uOW.EFSessionRepository.GetDeteils(id).ToDto();
             }
             else
-                throw new Exception("Such item dosen't exist");
+                throw new Exception("Such item doesn't exist");
         }
 
         public void Update(SessionDto sessionDto)

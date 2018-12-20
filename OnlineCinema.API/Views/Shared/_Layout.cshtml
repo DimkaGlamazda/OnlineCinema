@@ -7,6 +7,11 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link type="text/css" href="css/bootstrap.min.css" />
+    <link type="text/css" href="css/bootstrap-timepicker.min.css" />
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -58,7 +63,7 @@
                     <div class="form-group">
                         <input class="form-control mb-2" type="text" name="email" value="gldmvl@gmail.com" placeholder="Email" />
                         <br />
-                        <input class="form-control" type="password" name="password" value="Q1234-4321" placeholder="Password"/>
+                        <input class="form-control" type="password" name="password" value="Q1234-4321" placeholder="Password" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -98,10 +103,8 @@
                     success: function (data) {
                         location.reload();
                     },
-                    complete: function (jqXHR)
-                    {
-                        if (jqXHR.status === 400)
-                        {
+                    complete: function (jqXHR) {
+                        if (jqXHR.status === 400) {
                             alert(jqXHR.responseJSON.error_description);
                             modal.modal("show");
                         }

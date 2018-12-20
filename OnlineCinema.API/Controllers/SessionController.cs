@@ -24,7 +24,7 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _sessionList = _sessionService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Title).ToList();
+            var _sessionList = _sessionService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Title);
             return Ok(_sessionList);
         }
 

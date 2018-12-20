@@ -1,0 +1,45 @@
+﻿@model OnlineCinema.BL.Model.SessionView
+
+<p>Session's title:</p>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+@Html.TextBoxFor(m => m.Title)
+<div>
+    <p style="color: crimson">@Html.ValidationMessageFor(model => model.Title)</p>
+</div>
+<p>Session starts from:</p>
+@Html.TextBoxFor(m => m.TimeFrom)
+<div>
+    <p style="color: crimson">@Html.ValidationMessageFor(model => model.TimeFrom)</p>
+</div>
+<p>Session ends on:</p>
+@Html.TextBoxFor(m => m.TimeTo)
+<div>
+    <p style="color: crimson">@Html.ValidationMessageFor(model => model.TimeTo)</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker3'>
+                    <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker3').datetimepicker({
+                    format: 'LT'
+                });
+            });
+        </script>
+    </div>
+</div>
+<hr />

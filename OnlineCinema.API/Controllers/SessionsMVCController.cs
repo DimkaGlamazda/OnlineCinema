@@ -50,7 +50,8 @@ namespace OnlineCinema.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                _sessionService.Add(session.ToDtoModel());
+
                 return RedirectToAction("Index");
             }
             else

@@ -1,4 +1,5 @@
-﻿using OnlineCinema.BL.Model;
+﻿using OnlineCinema.BL.Extensions;
+using OnlineCinema.BL.Model;
 using OnlineCinema.DB;
 using OnlineCinema.DB.DTOs;
 using OnlineCinema.DB.Extensions;
@@ -12,50 +13,73 @@ namespace OnlineCinema.BL.Services
 {
     public interface IScheduleService
     {
-        int Add(ScheduleDto scheduleDto);
+        int Add(ScheduleView scheduleDto);
 
-        void Update(ScheduleDto scheduleDto);
+        void Update(ScheduleView scheduleDto);
 
         void Delete(int id);
 
-        ScheduleDto GetItem(int id);
+        ScheduleView GetItem(int id);
 
-        List<ScheduleDto> GetAll();
+        List<ScheduleView> GetAll();
     }
 
     public class ScheduleService : IScheduleService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(ScheduleDto scheduleDto)
+        public int Add(ScheduleView scheduleView)
         {
-            var schedule = scheduleDto.ToSqlModel();
-            _uOW.EFScheduleRepository.Add(schedule);
+            var newItem = scheduleView.ToDtoModel().ToSqlModel();
+            int count = _uOW.EFScheduleRepository.Get()
+                .Count(
+                    m => m.MovieId == newItem.MovieId
+                    && m.SessionId == newItem.SessionId
+                    && m.Date == newItem.Date
+                );
+
+            if (count > 0)
+                throw new DublicateScheduleItemException();
+
+    
+            _uOW.EFScheduleRepository.Add(newItem);
             _uOW.Save();
 
-            return schedule.Id;
+            return newItem.Id;
         }
 
         public void Delete(int id)
         {
-            var schedule = GetItem(id);
-            //schedule.IsDeleted = true;
+            _uOW.EFScheduleRepository.Delete(id);
             _uOW.Save();
         }
 
-        public List<ScheduleDto> GetAll()
+        public List<ScheduleView> GetAll()
         {
-            return _uOW.EFScheduleRepository.Get().Select(s => s.ToDto()).ToList();
+            return _uOW.EFScheduleRepository.Get().Select(s => s.ToDto().ToViewModel()).ToList();
         }
 
-        public ScheduleDto GetItem(int id)
+        public ScheduleView GetItem(int id)
         {
-            return _uOW.EFScheduleRepository.GetDeteils(id).ToDto();
+            return _uOW.EFScheduleRepository.GetDeteils(id).ToDto().ToViewModel();
         }
 
-        public void Update(ScheduleDto scheduleDto)
+        public void Update(ScheduleView scheduleView)
         {
-            var schedule = scheduleDto.ToSqlModel();
+            var newItem = scheduleView.ToDtoModel().ToSqlModel();
+
+            int count = _uOW.EFScheduleRepository.Get()
+                .Count(
+                    m => m.MovieId == newItem.MovieId
+                    && m.SessionId == newItem.SessionId
+                    && m.Date == newItem.Date
+                    && m.Id != newItem.Id
+                );
+
+            if (count > 0)
+                throw new DublicateScheduleItemException();
+
+            _uOW.EFScheduleRepository.Update(newItem);
             _uOW.Save();
         }
     }

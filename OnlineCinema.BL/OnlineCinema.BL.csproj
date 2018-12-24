@@ -44,6 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\GenreNotExists.cs" />
+    <Compile Include="Attributes\IsMoreThenCurrentDate.cs" />
+    <Compile Include="Extensions\DublicateScheduleItemException.cs" />
     <Compile Include="Extensions\GenreConversion.cs" />
     <Compile Include="Extensions\MovieConvertion.cs" />
     <Compile Include="Extensions\ScheduleConvertion.cs" />
@@ -53,9 +56,11 @@
     <Compile Include="Model\ScheduleView.cs" />
     <Compile Include="Model\SessionView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\MockMovieService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
+    <Compile Include="Services\SessionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OnlineCinema.DB\OnlineCinema.DB.csproj">
@@ -67,5 +72,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

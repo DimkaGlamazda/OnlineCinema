@@ -1,4 +1,5 @@
-﻿using OnlineCinema.BL.Model;
+﻿using OnlineCinema.BL.Extensions;
+using OnlineCinema.BL.Model;
 using OnlineCinema.DB;
 using OnlineCinema.DB.DTOs;
 using OnlineCinema.DB.Extensions;
@@ -12,24 +13,24 @@ namespace OnlineCinema.BL.Services
 {
     public interface IMovieService
     {
-        int Add(MovieDto movieDto);
+        int Add(MovieView movieDto);
 
-        void Update(MovieDto movieDto);
+        void Update(MovieView movieDto);
 
         void Delete(int id);
 
-        MovieDto GetItem(int id);
+        MovieView GetItem(int id);
 
-        List<MovieDto> GetAll();
+        List<MovieView> GetAll();
     }
 
     public class MovieService : IMovieService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(MovieDto movieDto)
+        public int Add(MovieView model)
         {
-            var movie = movieDto.ToSqlModel();
+            var movie = model.ToDtoModel().ToSqlModel();
             _uOW.EFMovieRepository.Add(movie);
             _uOW.Save();
 
@@ -38,24 +39,24 @@ namespace OnlineCinema.BL.Services
 
         public void Delete(int id)
         {
-            var movie = GetItem(id);
-            //movie.IsDeleted = true;
+            _uOW.EFMovieRepository.Delete(id);
             _uOW.Save();
         }
 
-        public List<MovieDto> GetAll()
+        public List<MovieView> GetAll()
         {
-            return _uOW.EFMovieRepository.Get().Select(mov => mov.ToDto()).ToList();
+            return _uOW.EFMovieRepository.Get().Select(mov => mov.ToDto().ToViewModel()).ToList();
         }
 
-        public MovieDto GetItem(int id)
+        public MovieView GetItem(int id)
         {
-            return _uOW.EFMovieRepository.GetDeteils(id).ToDto();
+            return _uOW.EFMovieRepository.GetDeteils(id).ToDto().ToViewModel();
         }
 
-        public void Update(MovieDto movieDto)
+        public void Update(MovieView model)
         {
-            var movie = movieDto.ToSqlModel();
+            var movie = model.ToDtoModel().ToSqlModel();
+            _uOW.EFMovieRepository.Update(movie);
             _uOW.Save();
         }
     }

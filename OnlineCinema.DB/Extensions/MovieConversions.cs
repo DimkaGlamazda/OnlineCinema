@@ -19,7 +19,8 @@ namespace OnlineCinema.DB.Extensions
                 GenreId= movieDto.GenreId,
                 Genre = movieDto.Genre.ToSqlModel(),
                 Name = movieDto.Name,
-                VideoLink = movieDto.VideoLink
+                VideoLink = movieDto.VideoLink,
+                IsDeleted = false
             };
         }
 

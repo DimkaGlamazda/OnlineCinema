@@ -23,16 +23,23 @@ namespace OnlineCinema.DB.Repository
 
         public void Delete(int id)
         {
+            var item = GetDeteils(id);
+
+            item.IsDeleted = true;
         }
 
         public List<Schedule> Get()
         {
-            return _context.Schedule.ToList();
+            return _context.Schedule
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .ToList();
         }
 
         public Schedule GetDeteils(int id)
         {
-            return _context.Schedule.FirstOrDefault(x=>x.Id==id);
+            return _context.Schedule
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Schedule schedule)

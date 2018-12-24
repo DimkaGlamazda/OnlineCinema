@@ -27,7 +27,14 @@ namespace OnlineCinema.DB.Repository
         {
             var genre = GetDeteils(id);
 
+            if(genre == null)
+                throw new Exception("Genre not found.");
+
+            if (genre.Movie.Count > 0)
+                throw new Exception("You can't delete genre what releted to existin movie. Should delete movie first.");
+
             genre.IsDeleted = true;
+
         }
 
         public List<Genre> Get()
@@ -39,7 +46,6 @@ namespace OnlineCinema.DB.Repository
 
         public Genre GetDeteils(int id)
         {
-
 
             return _context.Genre
                 .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)

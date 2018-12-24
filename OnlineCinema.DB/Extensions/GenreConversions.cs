@@ -15,7 +15,8 @@ namespace OnlineCinema.DB.Extensions
             return new Genre
             {
                 Id = genreDto.Id,
-                Name = genreDto.Name
+                Name = genreDto.Name,
+                IsDeleted = false
             };
         }
 

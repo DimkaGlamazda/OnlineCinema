@@ -1,5 +1,7 @@
-﻿using System;
+﻿using OnlineCinema.BL.Attributes;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,10 +12,14 @@ namespace OnlineCinema.BL.Model
     {
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        [Required(ErrorMessage = "Required field")]
+        [IsMoreThenCurrentDate]
+        public string Date { get; set; }
 
+        [Required(ErrorMessage = "Required field")]
         public int MovieId { get; set; }
 
+        [Required(ErrorMessage = "Required field")]
         public int SessionId { get; set; }
 
         public virtual MovieView Movie { get; set; }

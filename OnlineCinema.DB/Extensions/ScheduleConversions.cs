@@ -19,7 +19,8 @@ namespace OnlineCinema.DB.Extensions
                 MovieId = scheduleDto.MovieId,
                 SessionId = scheduleDto.SessionId,
                 Movie = scheduleDto.Movie.ToSqlModel(),
-                Session = scheduleDto.Session.ToSqlModel()
+                Session = scheduleDto.Session.ToSqlModel(),
+                IsDeleted = false
             };
         }
 

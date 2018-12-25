@@ -1,5 +1,6 @@
 ﻿using OnlineCinema.BL.Model;
 using OnlineCinema.DB.DTOs;
+using System;
 
 namespace OnlineCinema.BL.Extensions
 {
@@ -15,7 +16,7 @@ namespace OnlineCinema.BL.Extensions
             return new ScheduleView
             {
                 Id = scheduleDto.Id,
-                Date = scheduleDto.Date,
+                Date = scheduleDto.Date.ToString("dd/MM/yyyy"),
                 MovieId = scheduleDto.MovieId,
                 SessionId = scheduleDto.SessionId,
                 Movie = scheduleDto.Movie.ToViewModel(),
@@ -23,7 +24,25 @@ namespace OnlineCinema.BL.Extensions
             };
         }
 
-        public static ScheduleDto ToDtoModel(this ScheduleView scheduleView)
+        public static ScheduleAdminView ToAdminViewModel(this ScheduleDto scheduleDto)
+        {
+            if (scheduleDto == null)
+            {
+                return null;
+            }
+
+            return new ScheduleAdminView
+            {
+                Id = scheduleDto.Id,
+                Date = scheduleDto.Date.ToString("dd/MM/yyyy"),
+                MovieId = scheduleDto.MovieId,
+                SessionId = scheduleDto.SessionId,
+                Movie = scheduleDto.Movie.ToViewModel(),
+                Session = scheduleDto.Session.ToViewModel()
+            };
+        }
+
+        public static ScheduleDto ToDtoModel(this IScheduleView scheduleView)
         {
             if (scheduleView == null)
             {
@@ -33,7 +52,7 @@ namespace OnlineCinema.BL.Extensions
             return new ScheduleDto
             {
                 Id = scheduleView.Id,
-                Date = scheduleView.Date,
+                Date = Convert.ToDateTime(scheduleView.Date),
                 MovieId = scheduleView.MovieId,
                 SessionId = scheduleView.SessionId,
                 Movie = scheduleView.Movie.ToDtoModel(),

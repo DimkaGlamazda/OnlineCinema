@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Movies";
+}
+
+<h2 class="h1">Movies</h2>
+
+<div class="text-right">
+    @Html.ActionLink("Create", "Create", "MovieMVC", new { area = "" }, new { @class = "btn btn-primary" })
+</div>
+<br />
+
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">Nothing found</div>
+        </div>
+    </div>
+}
+else
+{
+    <table class="table">
+        <tbody>
+            @foreach (var movie in Model)
+            {
+                <tr>
+                    <td>@movie.Name</td>
+                    <td class="text-right">
+                        @Html.ActionLink("Edit", "Edit", "MovieMVC", new { id = movie.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Delete", "Delete", "MovieMVC", new { id = movie.Id }, new { @class = "btn btn-danger", @data_action = "delete" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <input type="hidden" name="deleteWarning" value="You are going to delete this Movie. Are you shure?" />
+    <input type="hidden" name="deleteError" value="@ViewBag.ErrorMessage" />
+    <input type="hidden" name="deleteSuccess" value="@ViewBag.SuccessMessage" />
+
+    @Html.Partial("_DeleteModal")
+}
+

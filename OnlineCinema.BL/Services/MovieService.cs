@@ -1,36 +1,45 @@
-﻿using OnlineCinema.BL.Model;
+﻿using OnlineCinema.BL.Extensions;
+using OnlineCinema.BL.Model;
 using OnlineCinema.DB;
-using OnlineCinema.DB.DTOs;
 using OnlineCinema.DB.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using OnlineCinema.BL.Exceptions;
 
 namespace OnlineCinema.BL.Services
 {
     public interface IMovieService
     {
-        int Add(MovieDto movieDto);
+        int Add(IMovieViewModel movie, HttpPostedFileBase image);
 
-        void Update(MovieDto movieDto);
+        void Update(IMovieViewModel movie, HttpPostedFileBase image);
 
         void Delete(int id);
 
-        MovieDto GetItem(int id);
+        MovieView GetItem(int id);
 
-        List<MovieDto> GetAll();
+        MovieAdminView GetItemForAdmin(int id);
+
+        List<MovieView> GetAll();
+
+        List<MovieAdminView> GetAllForAdmin();
     }
 
     public class MovieService : IMovieService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(MovieDto movieDto)
+        public int Add(IMovieViewModel movie, HttpPostedFileBase image)
         {
-            var movie = movieDto.ToSqlModel();
-            _uOW.EFMovieRepository.Add(movie);
+
+            if (image == null)
+                throw new ImageNotFoundException();
+
+            movie.Image = new byte[image.ContentLength];
+            image.InputStream.Read(movie.Image, 0, image.ContentLength);
+
+            _uOW.EFMovieRepository.Add(movie.ToDtoModel().ToSqlModel());
             _uOW.Save();
 
             return movie.Id;
@@ -38,24 +47,54 @@ namespace OnlineCinema.BL.Services
 
         public void Delete(int id)
         {
-            var movie = GetItem(id);
-            //movie.IsDeleted = true;
+            _uOW.EFMovieRepository.Delete(id);
             _uOW.Save();
         }
 
-        public List<MovieDto> GetAll()
+        public List<MovieView> GetAll()
         {
-            return _uOW.EFMovieRepository.Get().Select(mov => mov.ToDto()).ToList();
+            return _uOW.EFMovieRepository.Get()
+                .Select(m => m.ToDto().ToViewModel())
+                .OrderBy(m => m.Name)
+                .ToList();
         }
 
-        public MovieDto GetItem(int id)
+        public List<MovieAdminView> GetAllForAdmin()
         {
-            return _uOW.EFMovieRepository.GetDeteils(id).ToDto();
+            return _uOW.EFMovieRepository.Get()
+                .Select(m => m.ToDto().ToAdminViewModel())
+                .OrderBy(m => m.Name)
+                .ToList();
         }
 
-        public void Update(MovieDto movieDto)
+        public MovieView GetItem(int id)
         {
-            var movie = movieDto.ToSqlModel();
+            return _uOW.EFMovieRepository.GetDeteils(id).ToDto().ToViewModel();
+        }
+
+        public MovieAdminView GetItemForAdmin(int id)
+        {
+            return _uOW.EFMovieRepository.GetDeteils(id).ToDto().ToAdminViewModel();
+        }
+
+        public void Update(IMovieViewModel movie, HttpPostedFileBase image)
+        {
+            var oldMovie = GetItem(movie.Id);
+
+            if(oldMovie.Image == null && image == null)
+                throw new ImageNotFoundException();
+
+            if(image == null)
+            {
+                movie.Image = oldMovie.Image;
+            }
+            else
+            {
+                movie.Image = new byte[image.ContentLength];
+                image.InputStream.Read(movie.Image, 0, image.ContentLength);
+            }
+
+            _uOW.EFMovieRepository.Update(movie.ToDtoModel().ToSqlModel());
             _uOW.Save();
         }
     }

@@ -1,0 +1,42 @@
+﻿@model OnlineCinema.BL.Model.SessionView
+
+<p>Session's title:</p>
+
+@Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+<div>
+    <p style="color: crimson">@Html.ValidationMessageFor(model => model.Title)</p>
+</div>
+<p>Session starts from:</p>
+
+<div class="row">
+    <div class='col-sm-3'>
+        <div class="form-group">
+            <div id="filterDate2">
+                <!-- Datepicker as text field -->
+                <div class="input-group date">
+                    @Html.TextBoxFor(m => m.TimeFrom, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>Session ends on:</p>
+
+<div class="row">
+    <div class='col-sm-3'>
+        <div class="form-group">
+            <div id="filterDate2">
+                <!-- Datepicker as text field -->
+                <div class="input-group date">
+                    @Html.TextBoxFor(m => m.TimeTo, new { @class = "form-control" })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

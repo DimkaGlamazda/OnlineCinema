@@ -5,9 +5,7 @@ namespace OnlineCinema.API.App_Start
 {
     using System;
     using System.Web;
-
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
     using OnlineCinema.BL.Services;
@@ -62,8 +60,10 @@ namespace OnlineCinema.API.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<IMovieService>().To<MockMovieService>();
-            //kernel.Bind<IScheduleService>().To<ScheduleService>();
+            kernel.Bind<IMovieService>().To<MovieService>();
+            kernel.Bind<IScheduleService>().To<ScheduleService>();
+            kernel.Bind<IGenreService>().To<GenreService>();
+            kernel.Bind<ISessionService>().To<SessionService>();
         }
     }
 }

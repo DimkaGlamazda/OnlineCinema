@@ -1,0 +1,24 @@
+﻿@model OnlineCinema.BL.Model.GenreView
+
+@if (Model.Id == 0)
+{
+    <h2>Create</h2>
+}
+else
+{
+    <h2>Edit</h2>
+}
+
+@using (Html.BeginForm("Save", "GenreMVC", null, FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id);
+    <div class="form-group">
+        @Html.Label("Title", new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+    <input class="btn btn-primary" type="submit" value="Save" />
+    @Html.ActionLink("Back", "index", "GenreMVC", null, new { @class = "btn btn-default" })
+}
+
+

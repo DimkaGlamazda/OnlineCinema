@@ -18,6 +18,8 @@ namespace OnlineCinema.DB.DataModels
 
         public int SessionId { get; set; }
 
+        public bool? IsDeleted { get; set; }
+
         public virtual Movie Movie { get; set; }
 
         public virtual Session Session { get; set; }

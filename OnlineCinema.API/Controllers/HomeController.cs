@@ -7,7 +7,7 @@ namespace OnlineCinema.API.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager _userManager;
 
         public ActionResult Index()
         {

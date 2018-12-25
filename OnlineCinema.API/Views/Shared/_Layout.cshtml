@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -17,19 +18,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("OnlineCinema", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+
+                    @if (HttpContext.Current.User.Identity.IsAuthenticated && HttpContext.Current.User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Logout", "Logout", "Home", new { area = "" }, null)</li>
+                        <li><a data-toggle="modal" data-target="#loginModal" href="#">Login</a></li>
                     }
                     else
                     {
-                        <li><a data-toggle="modal" data-target="#loginModal" href="#">Login</a></li>
+                        <li>@Html.ActionLink("Schedule", "Index", "ScheduleMVC")</li>
+                        <li>@Html.ActionLink("Genre", "index", "GenreMVC")</li>
+                        <li>@Html.ActionLink("Movies", "index", "MovieMVC")</li>
+                        <li>@Html.ActionLink("Sessions", "index", "SessionsMVC")</li>
+
                     }
                 </ul>
             </div>
@@ -44,72 +51,29 @@
         </footer>
     </div>
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Autorization</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input class="form-control mb-2" type="text" name="email" value="gldmvl@gmail.com" placeholder="Email" />
-                        <br />
-                        <input class="form-control" type="password" name="password" value="Q1234-4321" placeholder="Password"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="login" type="button" class="btn btn-primary">Login</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    @Html.Partial("_AuthModal")
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("/Scripts/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/bootstrap-datetimepicker.js")"></script>
+
     <script>
         $(function () {
 
-            var modal = $('#loginModal');
-
-            $('#login').on('click', function (e) {
-                e.preventDefault();
-
-                var username = $.trim($('[name=email]').val()); // gldmvl@gmail.com
-                var password = $.trim($('[name=password]').val()); // Q1234-4321
-                console.log(username);
-                console.log(password);
-                $.ajax({
-                    method: 'POST',
-                    url: "/Token",
-                    data: {
-                        grant_type: 'password',
-                        username: username,
-                        password: password
-                    },
-                    beforeSend: function () {
-                        modal.modal('hide');
-                    },
-                    success: function (data) {
-                        location.reload();
-                    },
-                    complete: function (jqXHR)
-                    {
-                        if (jqXHR.status === 400)
-                        {
-                            alert(jqXHR.responseJSON.error_description);
-                            modal.modal("show");
-                        }
-                    }
-                });
+            $('.input-group.date').datetimepicker({
+                format: 'HH:mm'
             });
 
-
+            $('.datepicker').datepicker({
+                format: 'dd.mm.yyyy'
+            });
         });
     </script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/auth-halper.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/delete-halper.js")"></script>
 </body>
 </html>

@@ -6,12 +6,11 @@ using System.ComponentModel.DataAnnotations;
 namespace OnlineCinema.BL.Model
 {
     
-    public class MovieView
+    public class MovieView : IMovieViewModel
     {
         public int Id { get; set; }
 
         [Required]
-        [Range(1, 5, ErrorMessage = "Choose from 1-5 genres for now")]
         public int GenreId { get; set; }
 
         [Required]
@@ -19,14 +18,13 @@ namespace OnlineCinema.BL.Model
         [StringLength(50, ErrorMessage = "Name shouldn't be more than 50 characters")]
         public string Name { get; set; }
 
-        [Required]
-        [Display(Name = "Paste your picture here")]
+        [Display(Name = "Poster")]
         [DataType(DataType.ImageUrl)]
         public byte[] Image { get; set; }
 
         [Required]
         [Display(Name = "Enter movie link")]
-        [DataType(DataType.Url)]
+        [RegularExpression(@"(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?", ErrorMessage = "Invalid url")]
         public string VideoLink { get; set; }
 
         public virtual GenreView Genre { get; set; }

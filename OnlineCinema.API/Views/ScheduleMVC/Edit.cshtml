@@ -1,0 +1,35 @@
+﻿@model OnlineCinema.BL.Model.ScheduleAdminView
+@{
+    ViewBag.Title = "Edit";
+}
+@if (Model.Id == 0)
+{
+    <h2>Create</h2>
+}
+else
+{
+    <h2>Update</h2>
+}
+
+@using (Html.BeginForm("Save", "ScheduleMVC"))
+{
+    @Html.HiddenFor(m => m.Id);
+    <div class="form-group">
+        <label>Select movie </label>
+        @Html.DropDownListFor(m => m.MovieId, new SelectList(Model.MoviesList, "Id", "Name"), "Chose..", new { @class = "form-control", @Id = "MovieId" })
+        @Html.ValidationMessageFor(m => m.MovieId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label>Select Session </label>
+        @Html.DropDownListFor(x => Model.SessionId, new SelectList(Model.SessionList, "Id", "Title"), "Chose..", new { @class = "form-control", @Id = "SessionId" })
+        @Html.ValidationMessageFor(m => m.SessionId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
+        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary">
+    @Html.ActionLink("Back", "index", "ScheduleMVC", null, new { @class = "btn btn-default" })
+}
+

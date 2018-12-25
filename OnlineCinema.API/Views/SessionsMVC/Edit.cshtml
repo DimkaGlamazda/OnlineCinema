@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Update session";
+}
+
+<h2>Edit session's fields</h2>
+
+@using (Html.BeginForm("Edit", "SessionsMVC", FormMethod.Post))
+{
+    Html.RenderPartial("Partial/SessionFormPartial");
+
+    <button type="submit">Update</button>
+}

@@ -11,7 +11,7 @@ using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class SessionController : ApiController
     {
         private readonly ISessionService _sessionService;
@@ -24,7 +24,7 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _sessionList = _sessionService.GetAll().Select(b => b.ToViewModel()).OrderBy(f => f.Title);
+            var _sessionList = _sessionService.GetAll().Select(b => b.ToViewModel());
             return Ok(_sessionList);
         }
 
@@ -67,10 +67,18 @@ namespace OnlineCinema.API.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int? id)
         {
-            _sessionService.Delete(id);
+            if (!id.HasValue)
+                return BadRequest();
 
+            if (id <= 0)
+                return BadRequest();
+
+            if (_sessionService.GetAll().FirstOrDefault(k => k.Id == id) == null)
+                return BadRequest();
+
+            _sessionService.Delete(id.Value);
             return Ok();
         }
     }

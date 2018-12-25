@@ -13,7 +13,6 @@ using System.Web.Mvc;
 
 namespace OnlineCinema.API.Controllers
 {
-    //[Authorize(Roles = "Admin")]
     public class SessionsMVCController : Controller
     {
         private readonly ISessionService _sessionService;
@@ -21,11 +20,6 @@ namespace OnlineCinema.API.Controllers
         public SessionsMVCController()
         {
             _sessionService = new SessionService();
-        }
-
-        public SessionsMVCController(ISessionService sessionService)
-        {
-            _sessionService = sessionService;
         }
 
         //Get All: SessionsMVC/Index
@@ -59,41 +53,37 @@ namespace OnlineCinema.API.Controllers
         }
 
         // GET: SessionsMVC/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            var session = _sessionService.GetItem(id);
+
+            return View(session.ToViewModel());
         }
 
         // POST: SessionsMVC/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(SessionView session)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                _sessionService.Update(session.ToDtoModel());
 
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
-                return View();
+                return View(session);
             }
         }
 
         // POST: SessionsMVC/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpGet]
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            _sessionService.Delete(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

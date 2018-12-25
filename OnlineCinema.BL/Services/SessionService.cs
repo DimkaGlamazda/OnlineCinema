@@ -51,13 +51,13 @@ namespace OnlineCinema.BL.Services
 
         public List<SessionDto> GetAll()
         {
-            return _uOW.EFSessionRepository.Get().Select(mov => mov.ToDto()).OrderBy(y => y.Title).ToList();
+            return _uOW.EFSessionRepository.Get().Where(s=>s.IsDeleted == false).Select(mov => mov.ToDto()).OrderBy(y => y.Title).ToList();
         }
 
         public SessionDto GetItem(int id)
         {
             var sessions = GetAll();
-            if (sessions.FirstOrDefault(s => s.Id == id) == null)
+            if (sessions.FirstOrDefault(s => s.Id == id) != null)
             {
                 return _uOW.EFSessionRepository.GetDeteils(id).ToDto();
             }

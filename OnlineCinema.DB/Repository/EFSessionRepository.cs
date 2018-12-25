@@ -30,7 +30,9 @@ namespace OnlineCinema.DB.Repository
 
         public List<Session> Get()
         {
-            return _context.Session.ToList();
+            return _context.Session
+                .Where(c => !c.IsDeleted.HasValue || !c.IsDeleted.Value)
+                .ToList();
         }
 
         public Session GetDeteils(int id)

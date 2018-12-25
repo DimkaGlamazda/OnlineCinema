@@ -40,8 +40,7 @@ namespace OnlineCinema.BL.Services
 
         public void Delete(int id)
         {
-            var session = GetItem(id);
-            session.ToDtoModel().ToSqlModel().IsDeleted = true;
+            _uOW.EFSessionRepository.Delete(id);
             _uOW.Save();
         }
 

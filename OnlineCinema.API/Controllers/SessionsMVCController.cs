@@ -65,12 +65,13 @@ namespace OnlineCinema.API.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             _sessionService.Delete(id);
 
-            return RedirectToAction("Index");
+            var sessions = _sessionService.GetAll();
+            return RedirectToAction("Index", sessions);
         }
     }
 }

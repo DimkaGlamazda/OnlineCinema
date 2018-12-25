@@ -78,7 +78,7 @@ namespace OnlineCinema.API.Controllers
         }
 
         // POST: SessionsMVC/Delete/5
-        [HttpGet]
+        [HttpPost]
         public ActionResult Delete(int id)
         {
             _sessionService.Delete(id);

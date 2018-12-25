@@ -46,12 +46,13 @@ namespace OnlineCinema.BL.Services
         {
             var movie = GetItem(id);
             movie.ToSqlModel().IsDeleted = true;
+
             _uOW.Save();
         }
 
         public List<SessionDto> GetAll()
         {
-            return _uOW.EFSessionRepository.Get().Where(s=>s.IsDeleted == false).Select(mov => mov.ToDto()).OrderBy(y => y.Title).ToList();
+            return _uOW.EFSessionRepository.Get().Where(s=>s.IsDeleted != true).Select(mov => mov.ToDto()).OrderBy(y => y.Title).ToList();
         }
 
         public SessionDto GetItem(int id)

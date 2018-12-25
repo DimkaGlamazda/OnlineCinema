@@ -24,7 +24,25 @@ namespace OnlineCinema.BL.Extensions
             };
         }
 
-        public static ScheduleDto ToDtoModel(this ScheduleView scheduleView)
+        public static ScheduleAdminView ToAdminViewModel(this ScheduleDto scheduleDto)
+        {
+            if (scheduleDto == null)
+            {
+                return null;
+            }
+
+            return new ScheduleAdminView
+            {
+                Id = scheduleDto.Id,
+                Date = scheduleDto.Date.ToString("dd/MM/yyyy"),
+                MovieId = scheduleDto.MovieId,
+                SessionId = scheduleDto.SessionId,
+                Movie = scheduleDto.Movie.ToViewModel(),
+                Session = scheduleDto.Session.ToViewModel()
+            };
+        }
+
+        public static ScheduleDto ToDtoModel(this IScheduleView scheduleView)
         {
             if (scheduleView == null)
             {

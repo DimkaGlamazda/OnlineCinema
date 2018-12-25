@@ -30,6 +30,12 @@ namespace OnlineCinema.BL.Services
 
         public int Add(GenreView genre)
         {
+            int itemsCount = _uOw.EFGenreRepository.Get().Count(m => m.Name == genre.Name);
+
+            if (itemsCount > 0)
+                throw new ItemAlreadyExistException();
+
+
             _uOw.EFGenreRepository.Add(genre.ToDtoModel().ToSqlModel());
             _uOw.Save();
             return genre.Id;
@@ -43,7 +49,10 @@ namespace OnlineCinema.BL.Services
 
         public List<GenreView> GetAll()
         {
-            return _uOw.EFGenreRepository.Get().Select(c => c.ToDto().ToViewModel()).ToList();
+            return _uOw.EFGenreRepository.Get()
+                .Select(c => c.ToDto().ToViewModel())
+                .OrderBy(f => f.Name)
+                .ToList();
         }
 
         public GenreView GetItem(int id)
@@ -53,6 +62,14 @@ namespace OnlineCinema.BL.Services
 
         public void Update(GenreView genre)
         {
+            int itemsCount = _uOw.EFGenreRepository.Get().Count(m => 
+                m.Name == genre.Name
+                && m.Id != genre.Id
+            );
+
+            if (itemsCount > 0)
+                throw new ItemAlreadyExistException();
+
             _uOw.EFGenreRepository.Update(genre.ToDtoModel().ToSqlModel());
             _uOw.Save();
         }

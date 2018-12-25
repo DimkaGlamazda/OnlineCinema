@@ -43,29 +43,6 @@ namespace OnlineCinema.API.Controllers
             return Ok(movie);
         }
 
-        [Authorize(Roles = "admin")]
-        [HttpPost]
-        public IHttpActionResult Add([FromBody]MovieView movie)
-        {
-            if (ModelState.IsValid)
-            {
-                int clientId = _movieService.Add(movie);
-                return Ok(clientId);
-            }
-            return BadRequest("You've entered invalid values!");
-        }
-
-        [Authorize(Roles = "admin")]
-        [HttpPut]
-        public IHttpActionResult Update([FromBody] MovieView model)
-        {
-            if (ModelState.IsValid)
-            {
-                _movieService.Update(model);
-                return Ok();
-            }
-            return BadRequest("You've entered invalid values!");
-        }
 
         [Authorize(Roles = "admin")]
         [HttpDelete]

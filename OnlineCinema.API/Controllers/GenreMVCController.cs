@@ -2,41 +2,42 @@
 using OnlineCinema.BL.Model;
 using OnlineCinema.BL.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace OnlineCinema.API.Controllers
 {
     public class GenreMVCController : Controller
     {
-        private readonly IGenreService _genreService = new GenreService();
+        private readonly IGenreService _genreService;
+
+        public GenreMVCController(IGenreService genreService)
+        {
+            _genreService = genreService;
+        }
 
         public ActionResult Index()
         {
-            var genres = _genreService.GetAll().OrderBy(f => f.Name);
+            var genres = _genreService.GetAll();
             return View(genres);
         }
 
         [HttpGet]
-        public ActionResult Editor(int id)
+        public ActionResult Edit(int id)
         {
             if(id == 0)
-            {
-                return View("Edit", new GenreView());
-            }
-            else
-            {
-                var genre = _genreService.GetItem(id);
+                return View(new GenreView());
 
-                if(genre != null)
-                {
-                    return View("Edit", genre);
-                }
+
+            var genre = _genreService.GetItem(id);
+
+            if (genre == null)
+            {
+                ViewBag.ErrorMessage = "Item not found";
+                return View(new GenreView());
             }
 
-            throw new ArgumentOutOfRangeException("Genre is not found.");
+            return View(genre);      
         }
 
         [HttpPost]
@@ -45,13 +46,20 @@ namespace OnlineCinema.API.Controllers
             if(!ModelState.IsValid)
                 return View("Edit", model);
 
-            if (model.Id == 0)
+            try
             {
-                _genreService.Add(model);
+                if (model.Id == 0)
+                {
+                    _genreService.Add(model);
+                }
+                else
+                {
+                    _genreService.Update(model);
+                }
             }
-            else
+            catch(ItemAlreadyExistException)
             {
-                _genreService.Update(model);
+                ModelState.AddModelError("Name", "Item with this value already exists.");
             }
 
             return View("Edit", model);
@@ -70,7 +78,6 @@ namespace OnlineCinema.API.Controllers
                 ViewBag.ErrorMessage = e.Message;
             }
 
-            
             var genres = _genreService.GetAll().OrderBy(f => f.Name);
             return View("Index", genres);
         }

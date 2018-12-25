@@ -1,4 +1,4 @@
-﻿@model OnlineCinema.BL.Model.MovieView
+﻿@model OnlineCinema.BL.Model.MovieAdminView
 
 @{
     ViewBag.Title = "Edit";
@@ -28,7 +28,7 @@ else
     </div>
     <div class="form-group">
         @Html.Label("Genre", new { @class = "control-label" })
-        @Html.DropDownListFor(m => m.GenreId, new SelectList(ViewBag.GenreList, "Id", "Name"), "Chose genre..", new { @class = "form-control" })
+        @Html.DropDownListFor(m => m.GenreId, new SelectList(Model.Genres, "Id", "Name"), "Chose genre..", new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.GenreId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">

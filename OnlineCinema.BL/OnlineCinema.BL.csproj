@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,20 +45,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\GenreNotExists.cs" />
     <Compile Include="Attributes\IsMoreThenCurrentDate.cs" />
-    <Compile Include="Extensions\DublicateScheduleItemException.cs" />
+    <Compile Include="Exceptions\ImageNotFoundException.cs" />
     <Compile Include="Extensions\GenreConversion.cs" />
+    <Compile Include="Exceptions\ItemAlreadyExistException.cs" />
     <Compile Include="Extensions\MovieConvertion.cs" />
     <Compile Include="Extensions\ScheduleConvertion.cs" />
     <Compile Include="Extensions\SessionConversion.cs" />
     <Compile Include="Model\GenreView.cs" />
+    <Compile Include="Model\MovieAdminView.cs" />
     <Compile Include="Model\MovieView.cs" />
+    <Compile Include="Model\ScheduleAdminView.cs" />
     <Compile Include="Model\ScheduleView.cs" />
     <Compile Include="Model\SessionView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\GenreService.cs" />
-    <Compile Include="Services\MockMovieService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\ScheduleService.cs" />
     <Compile Include="Services\SessionService.cs" />

@@ -1,5 +1,4 @@
-﻿
-@model OnlineCinema.BL.Model.ScheduleView
+﻿@model OnlineCinema.BL.Model.ScheduleAdminView
 @{
     ViewBag.Title = "Edit";
 }
@@ -12,18 +11,17 @@ else
     <h2>Update</h2>
 }
 
-
 @using (Html.BeginForm("Save", "ScheduleMVC"))
 {
     @Html.HiddenFor(m => m.Id);
     <div class="form-group">
         <label>Select movie </label>
-        @Html.DropDownListFor(m => m.MovieId, new SelectList(ViewBag.MovieList, "Id", "Name"), "Chose..", new { @class = "form-control", @Id = "MovieId" })
+        @Html.DropDownListFor(m => m.MovieId, new SelectList(Model.MoviesList, "Id", "Name"), "Chose..", new { @class = "form-control", @Id = "MovieId" })
         @Html.ValidationMessageFor(m => m.MovieId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
         <label>Select Session </label>
-        @Html.DropDownListFor(x => Model.SessionId, new SelectList(ViewBag.SessionList, "Id", "Title"), "Chose..", new { @class = "form-control", @Id = "SessionId" })
+        @Html.DropDownListFor(x => Model.SessionId, new SelectList(Model.SessionList, "Id", "Title"), "Chose..", new { @class = "form-control", @Id = "SessionId" })
         @Html.ValidationMessageFor(m => m.SessionId, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">

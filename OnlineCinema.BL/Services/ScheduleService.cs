@@ -13,24 +13,29 @@ namespace OnlineCinema.BL.Services
 {
     public interface IScheduleService
     {
-        int Add(ScheduleView scheduleDto);
+        int Add(IScheduleView scheduleDto);
 
-        void Update(ScheduleView scheduleDto);
+        void Update(IScheduleView scheduleDto);
 
         void Delete(int id);
 
         ScheduleView GetItem(int id);
 
+        ScheduleAdminView GetItemForAdmin(int id);
+
         List<ScheduleView> GetAll();
+
+        List<ScheduleAdminView> GetAllForAdmin();
     }
 
     public class ScheduleService : IScheduleService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(ScheduleView scheduleView)
+        public int Add(IScheduleView scheduleView)
         {
             var newItem = scheduleView.ToDtoModel().ToSqlModel();
+
             int count = _uOW.EFScheduleRepository.Get()
                 .Count(
                     m => m.MovieId == newItem.MovieId
@@ -39,7 +44,7 @@ namespace OnlineCinema.BL.Services
                 );
 
             if (count > 0)
-                throw new DublicateScheduleItemException();
+                throw new ItemAlreadyExistException();
 
     
             _uOW.EFScheduleRepository.Add(newItem);
@@ -59,12 +64,22 @@ namespace OnlineCinema.BL.Services
             return _uOW.EFScheduleRepository.Get().Select(s => s.ToDto().ToViewModel()).ToList();
         }
 
+        public List<ScheduleAdminView> GetAllForAdmin()
+        {
+            return _uOW.EFScheduleRepository.Get().Select(s => s.ToDto().ToAdminViewModel()).ToList();
+        }
+
         public ScheduleView GetItem(int id)
         {
             return _uOW.EFScheduleRepository.GetDeteils(id).ToDto().ToViewModel();
         }
 
-        public void Update(ScheduleView scheduleView)
+        public ScheduleAdminView GetItemForAdmin(int id)
+        {
+            return _uOW.EFScheduleRepository.GetDeteils(id).ToDto().ToAdminViewModel();
+        }
+
+        public void Update(IScheduleView scheduleView)
         {
             var newItem = scheduleView.ToDtoModel().ToSqlModel();
 
@@ -77,7 +92,7 @@ namespace OnlineCinema.BL.Services
                 );
 
             if (count > 0)
-                throw new DublicateScheduleItemException();
+                throw new ItemAlreadyExistException();
 
             _uOW.EFScheduleRepository.Update(newItem);
             _uOW.Save();

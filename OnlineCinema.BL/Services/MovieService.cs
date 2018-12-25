@@ -1,37 +1,45 @@
 ﻿using OnlineCinema.BL.Extensions;
 using OnlineCinema.BL.Model;
 using OnlineCinema.DB;
-using OnlineCinema.DB.DTOs;
 using OnlineCinema.DB.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using OnlineCinema.BL.Exceptions;
 
 namespace OnlineCinema.BL.Services
 {
     public interface IMovieService
     {
-        int Add(MovieView movieDto);
+        int Add(IMovieViewModel movie, HttpPostedFileBase image);
 
-        void Update(MovieView movieDto);
+        void Update(IMovieViewModel movie, HttpPostedFileBase image);
 
         void Delete(int id);
 
         MovieView GetItem(int id);
 
+        MovieAdminView GetItemForAdmin(int id);
+
         List<MovieView> GetAll();
+
+        List<MovieAdminView> GetAllForAdmin();
     }
 
     public class MovieService : IMovieService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(MovieView model)
+        public int Add(IMovieViewModel movie, HttpPostedFileBase image)
         {
-            var movie = model.ToDtoModel().ToSqlModel();
-            _uOW.EFMovieRepository.Add(movie);
+
+            if (image == null)
+                throw new ImageNotFoundException();
+
+            movie.Image = new byte[image.ContentLength];
+            image.InputStream.Read(movie.Image, 0, image.ContentLength);
+
+            _uOW.EFMovieRepository.Add(movie.ToDtoModel().ToSqlModel());
             _uOW.Save();
 
             return movie.Id;
@@ -45,7 +53,18 @@ namespace OnlineCinema.BL.Services
 
         public List<MovieView> GetAll()
         {
-            return _uOW.EFMovieRepository.Get().Select(mov => mov.ToDto().ToViewModel()).ToList();
+            return _uOW.EFMovieRepository.Get()
+                .Select(m => m.ToDto().ToViewModel())
+                .OrderBy(m => m.Name)
+                .ToList();
+        }
+
+        public List<MovieAdminView> GetAllForAdmin()
+        {
+            return _uOW.EFMovieRepository.Get()
+                .Select(m => m.ToDto().ToAdminViewModel())
+                .OrderBy(m => m.Name)
+                .ToList();
         }
 
         public MovieView GetItem(int id)
@@ -53,10 +72,29 @@ namespace OnlineCinema.BL.Services
             return _uOW.EFMovieRepository.GetDeteils(id).ToDto().ToViewModel();
         }
 
-        public void Update(MovieView model)
+        public MovieAdminView GetItemForAdmin(int id)
         {
-            var movie = model.ToDtoModel().ToSqlModel();
-            _uOW.EFMovieRepository.Update(movie);
+            return _uOW.EFMovieRepository.GetDeteils(id).ToDto().ToAdminViewModel();
+        }
+
+        public void Update(IMovieViewModel movie, HttpPostedFileBase image)
+        {
+            var oldMovie = GetItem(movie.Id);
+
+            if(oldMovie.Image == null && image == null)
+                throw new ImageNotFoundException();
+
+            if(image == null)
+            {
+                movie.Image = oldMovie.Image;
+            }
+            else
+            {
+                movie.Image = new byte[image.ContentLength];
+                image.InputStream.Read(movie.Image, 0, image.ContentLength);
+            }
+
+            _uOW.EFMovieRepository.Update(movie.ToDtoModel().ToSqlModel());
             _uOW.Save();
         }
     }

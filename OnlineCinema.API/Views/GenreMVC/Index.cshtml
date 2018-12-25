@@ -7,7 +7,7 @@
 <h2 class="h1">Genres</h2>
 
 <div class="text-right">
-    @Html.ActionLink("Create", "Editor", "GenreMVC", new { id = 0 }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Create", "Edit", "GenreMVC", new { id = 0 }, new { @class = "btn btn-primary" })
 </div>
 <br />
 @if (Model == null)
@@ -27,7 +27,7 @@ else
                 <tr>
                     <td>@genre.Name</td>
                     <td class="text-right">
-                        @Html.ActionLink("Edit", "Editor", "GenreMVC", new { id = genre.Id }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Edit", "Edit", "GenreMVC", new { id = genre.Id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Delete", "Delete", "GenreMVC", new { id = genre.Id }, new { @class = "btn btn-danger", @data_action = "delete" })
                     </td>
                 </tr>

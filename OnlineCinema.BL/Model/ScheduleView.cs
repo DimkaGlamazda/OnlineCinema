@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineCinema.BL.Model
 {
-    public class ScheduleView
+    public class ScheduleView : IScheduleView
     {
         public int Id { get; set; }
 

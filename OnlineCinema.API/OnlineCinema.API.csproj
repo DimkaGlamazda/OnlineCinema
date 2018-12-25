@@ -55,6 +55,9 @@
     <Reference Include="Ninject.Web.Common, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.2.0.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject.Web.WebApi, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.Web.WebApi.3.2.0.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
     </Reference>
@@ -452,10 +455,6 @@
     <ProjectReference Include="..\OnlineCinema.BL\OnlineCinema.BL.csproj">
       <Project>{3fd51947-2c10-4dfd-878b-c55cedcbaf8b}</Project>
       <Name>OnlineCinema.BL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OnlineCinema.DB\OnlineCinema.DB.csproj">
-      <Project>{5405BBF1-ABCE-4BFA-AB25-E4BA62F65531}</Project>
-      <Name>OnlineCinema.DB</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

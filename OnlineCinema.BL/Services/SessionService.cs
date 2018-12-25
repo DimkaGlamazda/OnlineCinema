@@ -1,4 +1,5 @@
-﻿using OnlineCinema.BL.Model;
+﻿using OnlineCinema.BL.Extensions;
+using OnlineCinema.BL.Model;
 using OnlineCinema.DB;
 using OnlineCinema.DB.DTOs;
 using OnlineCinema.DB.Extensions;
@@ -12,27 +13,28 @@ namespace OnlineCinema.BL.Services
 {
     public interface ISessionService
     {
-        int Add(SessionDto sessionDto);
+        int Add(SessionView sessionView);
 
-        void Update(SessionDto sessionDto);
+        void Update(SessionView sessionView);
 
         void Delete(int id);
 
-        SessionDto GetItem(int id);
+        SessionView GetItem(int id);
 
-        List<SessionDto> GetAll();
+        List<SessionView> GetAll();
     }
 
     public class SessionService : ISessionService
     {
         private UnitOfWork _uOW = new UnitOfWork();
 
-        public int Add(SessionDto sessionDto)
+        public int Add(SessionView sessionView)
         {
             var sessions = GetAll();
-            if (!sessions.Any(s => s.Title == sessionDto.Title))
+
+            if (!sessions.Any(s => s.Title == sessionView.Title))
             {
-                var session = sessionDto.ToSqlModel();
+                var session = sessionView.ToDtoModel().ToSqlModel();
                 _uOW.EFSessionRepository.Add(session);
                 _uOW.Save();
 
@@ -44,30 +46,36 @@ namespace OnlineCinema.BL.Services
 
         public void Delete(int id)
         {
-            var movie = GetItem(id);
-            movie.ToSqlModel().IsDeleted = true;
+            var session = GetItem(id);
+            session.ToDtoModel().ToSqlModel().IsDeleted = true;
             _uOW.Save();
         }
 
-        public List<SessionDto> GetAll()
+        public List<SessionView> GetAll()
         {
-            return _uOW.EFSessionRepository.Get().Select(mov => mov.ToDto()).OrderBy(y => y.Title).ToList();
+            return _uOW.EFSessionRepository.Get()
+                .Select(mov => mov.ToDto().ToViewModel())
+                .OrderBy(y => y.Title)
+                .ToList();
         }
 
-        public SessionDto GetItem(int id)
+        public SessionView GetItem(int id)
         {
             var sessions = GetAll();
+
             if (!sessions.Any(s => s.Id == id))
             {
-                return _uOW.EFSessionRepository.GetDeteils(id).ToDto();
+                return _uOW.EFSessionRepository
+                    .GetDeteils(id)
+                    .ToDto().ToViewModel();
             }
             else
                 throw new Exception("Such item dosen't exist");
         }
 
-        public void Update(SessionDto sessionDto)
+        public void Update(SessionView session)
         {
-            _uOW.EFSessionRepository.Update(sessionDto.ToSqlModel());
+            _uOW.EFSessionRepository.Update(session.ToDtoModel().ToSqlModel());
             _uOW.Save();
         }
     }

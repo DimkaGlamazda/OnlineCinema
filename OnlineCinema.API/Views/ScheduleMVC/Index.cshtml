@@ -1,14 +1,13 @@
 ﻿<h2>Schedule</h2>
 
 <div class="text-right">
-    @Html.ActionLink("Create", "Editor", "ScheduleMVC", new { id = 0 }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Create", "Edit", "ScheduleMVC", new { id = 0 }, new { @class = "btn btn-primary" })
     <br />
     <br />
 </div>
 
 @if (Model != null)
 {
-
     <table class="table">
         <tr>
             <td>Movie</td>
@@ -23,7 +22,7 @@
                 <td>@schedule.Session.Title</td>
                 <td>@schedule.Date</td>
                 <td class="text-right">
-                    @Html.ActionLink("Edit", "Editor", "ScheduleMVC", new { id = schedule.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Edit", "Edit", "ScheduleMVC", new { id = schedule.Id }, new { @class = "btn btn-primary" })
                     @Html.ActionLink("Delete", "Delete", "ScheduleMVC", new { id = schedule.Id }, new { @class = "btn btn-danger", @data_action = "delete" })
                 </td>
             </tr>

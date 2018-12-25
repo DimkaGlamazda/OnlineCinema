@@ -1,55 +1,44 @@
-﻿using OnlineCinema.API.Models;
-using OnlineCinema.BL.Extensions;
+﻿using OnlineCinema.BL.Extensions;
 using OnlineCinema.BL.Model;
 using OnlineCinema.BL.Services;
-using OnlineCinema.DB.DataModels;
-using OnlineCinema.DB.DTOs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Ninject;
 
 namespace OnlineCinema.API.Controllers
 {
     public class ScheduleMVCController : Controller
     {
-        private readonly IMovieService _movieService = new MovieService();
-        private readonly IScheduleService _scheduleServise = new ScheduleService();
-        private readonly ISessionService _sessionServics = new SessionService();
+        private readonly IScheduleService _scheduleServise;
+
+        public ScheduleMVCController(IScheduleService scheduleService)
+        {
+            _scheduleServise = scheduleService;
+        }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var model = _scheduleServise.GetAll();
+            var model = _scheduleServise.GetAllForAdmin();
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult Editor(int id)
+        public ActionResult Edit(int id)
         {
-            
-            ViewBag.MovieList = _movieService.GetAll();
-            ViewBag.SessionList = _sessionServics.GetAll();
-
-            var model = new ScheduleView();
+            var model = new ScheduleAdminView();
 
             if(id != 0)
             {
-                model = _scheduleServise.GetItem(id);
+                model = _scheduleServise.GetItemForAdmin(id);
             }
 
-
-            return View("Edit", model);
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Save(ScheduleView model)
+        public ActionResult Save(ScheduleAdminView model)
         {
-
-            ViewBag.MovieList = _movieService.GetAll();
-            ViewBag.SessionList = _sessionServics.GetAll();
-
             if (!ModelState.IsValid)
                 return View("Edit", model);
 
@@ -64,7 +53,7 @@ namespace OnlineCinema.API.Controllers
                     _scheduleServise.Update(model);
                 }
             }
-            catch (DublicateScheduleItemException e)
+            catch (ItemAlreadyExistException)
             {
                 ModelState.AddModelError("MovieId", "Item with this value already exists.");
                 ModelState.AddModelError("SessionId", "Item with this value already exists.");

@@ -10,7 +10,6 @@ namespace OnlineCinema.BL.Model
         public int Id { get; set; }
 
         [Required(ErrorMessage  = "Required field")]
-        [GenreNotExists]
         public string Name { get; set; }
     }
 }

@@ -30,18 +30,12 @@ namespace OnlineCinema.BL.Services
 
         public int Add(SessionView sessionView)
         {
-            var sessions = GetAll();
+            var session = sessionView.ToDtoModel().ToSqlModel();
 
-            if (!sessions.Any(s => s.Title == sessionView.Title))
-            {
-                var session = sessionView.ToDtoModel().ToSqlModel();
-                _uOW.EFSessionRepository.Add(session);
-                _uOW.Save();
+            _uOW.EFSessionRepository.Add(session);
+            _uOW.Save();
 
-                return session.Id;
-            }
-            else
-                throw new Exception("Such item does already exist");
+            return session.Id;
         }
 
         public void Delete(int id)
@@ -61,16 +55,10 @@ namespace OnlineCinema.BL.Services
 
         public SessionView GetItem(int id)
         {
-            var sessions = GetAll();
-
-            if (!sessions.Any(s => s.Id == id))
-            {
-                return _uOW.EFSessionRepository
-                    .GetDeteils(id)
-                    .ToDto().ToViewModel();
-            }
-            else
-                throw new Exception("Such item dosen't exist");
+            return _uOW.EFSessionRepository
+                   .GetDeteils(id)
+                   .ToDto()
+                   .ToViewModel();
         }
 
         public void Update(SessionView session)

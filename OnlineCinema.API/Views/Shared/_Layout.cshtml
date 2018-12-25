@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    <link href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" rel="stylesheet" type="text/css" />
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -34,6 +35,7 @@
                         <li>@Html.ActionLink("Schedule", "Index", "ScheduleMVC")</li>
                         <li>@Html.ActionLink("Genre", "index", "GenreMVC")</li>
                         <li>@Html.ActionLink("Movies", "index", "MovieMVC")</li>
+                        <li>@Html.ActionLink("Sessions", "index", "SessionsMVC")</li>
 
                     }
                 </ul>
@@ -56,8 +58,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script type="text/javascript" src="@Url.Content("/Scripts/bootstrap-datepicker.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/bootstrap-datetimepicker.js")"></script>
+
     <script>
         $(function () {
+
+            $('.input-group.date').datetimepicker({
+                format: 'HH:mm'
+            });
+
             $('.datepicker').datepicker({
                 format: 'dd.mm.yyyy'
             });

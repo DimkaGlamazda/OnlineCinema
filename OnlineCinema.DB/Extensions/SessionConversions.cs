@@ -33,7 +33,8 @@ namespace OnlineCinema.DB.Extensions
                 Id = sessionDto.Id,
                 TimeFrom = sessionDto.TimeFrom,
                 TimeTo = sessionDto.TimeTo,
-                Title = sessionDto.Title
+                Title = sessionDto.Title,
+                IsDeleted = false
             };
         }
     }

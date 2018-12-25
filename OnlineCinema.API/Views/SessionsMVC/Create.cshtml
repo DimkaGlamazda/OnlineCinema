@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Create session";
+}
+
+<h2>Create new session</h2>
+
+@using (Html.BeginForm("Create", "SessionsMVC", FormMethod.Post))
+{
+    Html.RenderPartial("Partial/SessionFormPartial");
+
+    <button type="submit">Create</button>
+}

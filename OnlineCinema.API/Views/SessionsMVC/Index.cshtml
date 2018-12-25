@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnlineCinema.BL.Model.SessionView>
+
+@{
+    ViewBag.Title = "Sessions";
+}
+
+<h2>All sessions during the day</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div style="text-align: right">
+                @Html.ActionLink("Add session", "Create", "SessionsMVC")
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var session in Model)
+            {
+                int index = Model.ToList().IndexOf(session);
+
+                <div class="item">
+                    <hr />
+                    <h3>@session.Title</h3>
+                    <h4>Start time - @session.TimeFrom</h4>
+                    <h4>End time - @session.TimeTo</h4>
+                    <h5>@Html.ActionLink("Edit session", "Edit", "SessionsMVC", new { id = session.Id }, null)</h5>
+                    <h5>@Html.ActionLink("Delete session", "Delete", "SessionsMVC", new { id = session.Id }, null)</h5>
+                    <hr />
+                </div>
+            }
+        </div>
+    </div>
+</div>

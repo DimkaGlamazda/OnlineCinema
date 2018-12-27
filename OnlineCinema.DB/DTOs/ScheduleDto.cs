@@ -16,10 +16,11 @@ namespace OnlineCinema.DB.DTOs
 
         public int SessionId { get; set; }
 
+
         public virtual MovieDto Movie { get; set; }
 
         public virtual SessionDto Session { get; set; }
 
-        //public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace OnlineCinema.API.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base(ConfigurationManager.ConnectionStrings["OnlineCinemaDataModel"].ConnectionString, throwIfV1Schema: false)
+            : base(ConfigurationManager.ConnectionStrings["OnlineCinema"].ConnectionString, throwIfV1Schema: false)
         {
         }
         

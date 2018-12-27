@@ -53,6 +53,7 @@
     <Compile Include="Extensions\ScheduleConvertion.cs" />
     <Compile Include="Extensions\SessionConversion.cs" />
     <Compile Include="Model\GenreView.cs" />
+    <Compile Include="Model\MockMovieView.cs" />
     <Compile Include="Model\MovieAdminView.cs" />
     <Compile Include="Model\MovieView.cs" />
     <Compile Include="Model\ScheduleAdminView.cs" />

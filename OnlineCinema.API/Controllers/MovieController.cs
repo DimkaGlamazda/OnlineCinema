@@ -23,7 +23,11 @@ namespace OnlineCinema.API.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var _moviesList = _movieService.GetAll().OrderBy(f => f.Name);
+            var _moviesList = _movieService.GetAllMock().OrderBy(f => f.name);
+
+            if (_moviesList == null)
+                return NotFound();
+
             return Ok(_moviesList);
         }
 
@@ -31,24 +35,32 @@ namespace OnlineCinema.API.Controllers
         public IHttpActionResult Get(int? id)
         {
             if (!id.HasValue)
-                return BadRequest();
+                return BadRequest("Check you parametr");
 
             if (id <= 0)
-                return BadRequest();
+                return BadRequest("Parameter cannot be less than or equal to zero");
 
-            if (_movieService.GetAll().FirstOrDefault(k => k.Id == id) == null)
-                return BadRequest();
+            if (_movieService.GetAllMock().FirstOrDefault(k => k.id == id) == null)
+                return NotFound();
 
-            var movie = _movieService.GetItem(id.Value);
+            var movie = _movieService.GetItemMock(id.Value);
             return Ok(movie);
         }
 
-
         [Authorize(Roles = "admin")]
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int? id)
         {
-            _movieService.Delete(id);
+            if (!id.HasValue)
+                return BadRequest("Check you parametr");
+
+            if (id <= 0)
+                return BadRequest("Parameter cannot be less than or equal to zero");
+
+            if (_movieService.GetAllMock().FirstOrDefault(k => k.id == id) == null)
+                return NotFound();
+
+            _movieService.Delete(id.Value);
 
             return Ok();
         }

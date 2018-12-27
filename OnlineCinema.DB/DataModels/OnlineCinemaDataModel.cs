@@ -9,7 +9,7 @@ namespace OnlineCinema.DB.DataModels
     public partial class OnlineCinemaDataModel : DbContext
     {
         public OnlineCinemaDataModel()
-            : base(ConfigurationManager.ConnectionStrings["OnlineCinemaDataModel"].ConnectionString)
+            : base(ConfigurationManager.ConnectionStrings["OnlineCinema"].ConnectionString)
         {
         }
 

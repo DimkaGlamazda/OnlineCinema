@@ -24,11 +24,22 @@ namespace OnlineCinema.BL.Services
         List<MovieView> GetAll();
 
         List<MovieAdminView> GetAllForAdmin();
+
+        List<MockMovie> GetAllMock();
+
+        MockMovie GetItemMock(int id);
     }
 
     public class MovieService : IMovieService
     {
-        private UnitOfWork _uOW = new UnitOfWork();
+        private UnitOfWork _uOW;
+        private MockMovieView _mockMovieView;
+
+        public MovieService()
+        {
+            _uOW = new UnitOfWork();
+            _mockMovieView = new MockMovieView();
+        }
 
         public int Add(IMovieViewModel movie, HttpPostedFileBase image)
         {
@@ -51,6 +62,11 @@ namespace OnlineCinema.BL.Services
             _uOW.Save();
         }
 
+        public List<MockMovie> GetAllMock()
+        {
+            return _mockMovieView.GetListMockMovie();
+        }
+
         public List<MovieView> GetAll()
         {
             return _uOW.EFMovieRepository.Get()
@@ -65,6 +81,11 @@ namespace OnlineCinema.BL.Services
                 .Select(m => m.ToDto().ToAdminViewModel())
                 .OrderBy(m => m.Name)
                 .ToList();
+        }
+
+        public MockMovie GetItemMock(int id)
+        {
+            return _mockMovieView.GetListMockMovie().FirstOrDefault(x => x.id == id);
         }
 
         public MovieView GetItem(int id)

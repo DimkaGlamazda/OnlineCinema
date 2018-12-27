@@ -37,7 +37,9 @@ namespace OnlineCinema.DB.Repository
 
         public Session GetDeteils(int id)
         {
-            return _context.Session.FirstOrDefault(x => x.Id == id);
+            return _context.Session
+                .Where(x => !x.IsDeleted.HasValue || !x.IsDeleted.Value)
+                .FirstOrDefault(x => x.Id == id);
         }
 
         public void Update(Session session)

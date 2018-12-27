@@ -57,6 +57,12 @@ namespace OnlineCinema.BL.Model
                         youtube = "https://www.youtube.com/watch?time_continue=57&v=fVDfuFL-QnY",
                         statDate = new DateTime(2018, 12, 13),
                         endDate = new DateTime(2019, 01, 09),
+                        sessions = new List<TimeSpan>()
+                                          {
+                                            new TimeSpan(10, 00, 0),
+                                            new TimeSpan(14, 30, 0),
+                                            new TimeSpan(20, 00, 0)
+                                          },
                         id = 2
                     }
                 );
@@ -76,6 +82,12 @@ namespace OnlineCinema.BL.Model
                         youtube = "https://www.youtube.com/watch?v=x0Q8jC6aVLI",
                         statDate = new DateTime(2018, 12, 20),
                         endDate = new DateTime(2019, 01, 16),
+                        sessions = new List<TimeSpan>()
+                                              {
+                                                new TimeSpan(10, 15, 0),
+                                                new TimeSpan(13, 40, 0),
+                                                new TimeSpan(19, 30, 0)
+                                              },
                         id = 3
                     }
                 );
